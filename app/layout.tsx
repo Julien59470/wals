@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./stability.css";
 import "./polish.css";
+import "./motion.css";
 
 const inter = Inter({
   subsets: ["latin"],
