@@ -1,96 +1,41 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 import { BrandMark } from "@/components/landing/BrandMark";
+import { HeaderClient } from "@/components/landing/HeaderClient";
 
-const workflow = [
-  ["01", "Préparer", "Créez une démonstration personnalisée avant même d'entrer chez le commerçant."],
-  ["02", "Présenter", "Montrez immédiatement le rendu sur mobile avec le logo, les couleurs et l'offre du prospect."],
-  ["03", "Vendre", "Proposez la fidélité, la roue digitale ou les deux, et construisez votre propre offre commerciale."],
-  ["04", "Développer", "Centralisez vos prospects, vos commerces actifs, vos démonstrations et votre activité au même endroit."],
+const sectors = ["BOULANGERIES", "BARBERS", "COIFFEURS", "RESTAURANTS", "INSTITUTS", "COFFEE SHOPS", "PIZZERIAS", "COMMERCES DE PROXIMITÉ"] as const;
+
+const faqs = [
+  ["Puis-je vendre uniquement la fidélité ou uniquement la roue ?", "Oui. Les deux solutions sont pensées pour être commercialisées séparément ou réunies dans une même offre selon le besoin du commerce."],
+  ["Est-ce moi qui construis mon offre commerciale ?", "Oui. WALS est conçu pour vous laisser structurer votre proposition, votre accompagnement et votre prix de vente au commerce."],
+  ["Puis-je préparer une démo avant d'entrer chez un prospect ?", "C'est un principe central de WALS : préparer une démonstration aux couleurs du commerce pour arriver avec quelque chose de concret à montrer, plutôt qu'avec une simple promesse."],
+  ["Le commerçant doit-il installer du matériel ?", "WALS est pensé autour d'expériences légères : QR code, navigateur mobile et Wallet. L'objectif est de limiter au maximum la friction et le matériel nécessaire sur place."],
+  ["Puis-je gérer plusieurs commerces ?", "Oui. Le cockpit revendeur est conçu pour suivre vos prospects, vos démos, vos commerces actifs et l'activité de votre portefeuille depuis un seul espace."],
+  ["Est-ce que l'expérience sera personnalisable ?", "Oui. L'identité du commerce, ses couleurs, ses offres et ses paramètres feront partie de la personnalisation. Les options exactes liées à l'identité revendeur seront précisées à l'ouverture."],
 ] as const;
-
-const dashboardRows = [
-  ["Le Fournil", "Fidélité", "Actif", "1 284"],
-  ["Nova Beauty", "Roue", "Démo", "—"],
-  ["Barber 22", "Fidélité + Roue", "Actif", "836"],
-] as const;
-
-function SignalIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 15.5 8.1 11l3.1 3.1L20 5.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M14.8 5.5H20v5.2" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12h14M14 7l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-function AppleMark() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M15.35 5.03c.88-1.03 1.49-2.45 1.32-3.86-1.27.05-2.81.85-3.72 1.88-.82.92-1.53 2.37-1.33 3.75 1.42.11 2.86-.72 3.73-1.77Zm3.18 7.7c-.03-3.08 2.52-4.56 2.63-4.63-1.43-2.09-3.66-2.38-4.45-2.41-1.89-.19-3.69 1.11-4.65 1.11-.96 0-2.45-1.08-4.03-1.05-2.07.03-3.98 1.2-5.05 3.05-2.15 3.73-.55 9.26 1.55 12.29 1.03 1.49 2.25 3.16 3.86 3.1 1.55-.06 2.13-1 4-1 1.86 0 2.38 1 4.02.97 1.66-.03 2.71-1.52 3.73-3.01 1.18-1.73 1.67-3.4 1.7-3.49-.04-.02-3.25-1.25-3.28-4.93Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function AndroidMark() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m7.1 7.2-1.4-2.4m11.2 2.4 1.4-2.4M6.1 9.2h11.8v7.7H6.1V9.2Zm2.1 7.7v3m7.6-3v3M4.2 10.3v5.2m15.6-5.2v5.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M7.2 9.2c.5-2.1 2.4-3.6 4.8-3.6s4.3 1.5 4.8 3.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="9.6" cy="7.5" r=".55" fill="currentColor" />
-      <circle cx="14.4" cy="7.5" r=".55" fill="currentColor" />
-    </svg>
-  );
+function CheckIcon() {
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.1 4L19 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
 function Iphone({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={`device iphone ${compact ? "device-compact" : ""}`} aria-label="Aperçu iPhone de la fidélité digitale proposée avec WALS">
-      <span className="iphone-button iphone-button-one" />
-      <span className="iphone-button iphone-button-two" />
-      <span className="iphone-button iphone-button-three" />
+    <div className={`device iphone ${compact ? "device-compact" : ""}`} aria-label="Aperçu d'une carte de fidélité digitale WALS">
       <div className="device-screen iphone-screen">
-        <div className="device-status ios-status">
-          <span>09:41</span>
-          <span className="status-cluster"><i /><i /><i /></span>
-        </div>
-        <div className="dynamic-island"><span /></div>
-        <div className="wallet-head">
-          <div>
-            <span className="screen-kicker">APPLE WALLET</span>
-            <strong>Mes cartes</strong>
-          </div>
-          <div className="wallet-avatar">JF</div>
-        </div>
+        <div className="device-status"><span>09:41</span><span>● ● ●</span></div>
+        <div className="dynamic-island" />
+        <div className="wallet-head"><span>APPLE WALLET</span><strong>Mes cartes</strong></div>
         <div className="wallet-pass">
-          <div className="pass-top">
-            <div className="pass-logo">W</div>
-            <div>
-              <span>Boulangerie</span>
-              <strong>Le Fournil</strong>
-            </div>
-            <span className="pass-count">8/10</span>
-          </div>
+          <div className="pass-top"><div className="pass-logo">W</div><div><span>Boulangerie</span><strong>Le Fournil</strong></div><span className="pass-count"><b>6</b>/10</span></div>
           <div className="stamp-grid">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <span key={index} className={index < 8 ? "stamp stamp-on" : "stamp"}>{index < 8 ? "W" : ""}</span>
-            ))}
+            {Array.from({ length: 10 }).map((_, index) => <span key={index} className={`stamp ${index < 6 ? "stamp-on" : index === 6 ? "stamp-next" : ""}`}>{index < 7 ? "W" : ""}</span>)}
           </div>
-          <div className="pass-note"><span>2 passages</span> avant votre récompense</div>
+          <div className="pass-note"><strong className="pass-note-before">Encore 4 passages</strong><strong className="pass-note-after">Encore 3 passages</strong><span>avant votre récompense</span></div>
           <div className="wallet-code"><i /><i /><i /><i /><i /></div>
         </div>
-        <div className="wallet-stack-card wallet-stack-card-a" />
-        <div className="wallet-stack-card wallet-stack-card-b" />
+        <div className="wallet-notification"><span>W</span><div><strong>Le Fournil</strong><small>Un nouveau tampon vient d'être ajouté.</small></div></div>
         <div className="iphone-home" />
       </div>
     </div>
@@ -99,34 +44,14 @@ function Iphone({ compact = false }: { compact?: boolean }) {
 
 function Samsung({ compact = false }: { compact?: boolean }) {
   return (
-    <div className={`device samsung ${compact ? "device-compact" : ""}`} aria-label="Aperçu Samsung de la roue digitale proposée avec WALS">
-      <span className="samsung-button samsung-button-one" />
-      <span className="samsung-button samsung-button-two" />
+    <div className={`device samsung ${compact ? "device-compact" : ""}`} aria-label="Aperçu de la roue digitale WALS">
       <div className="device-screen samsung-screen">
-        <div className="device-status android-status">
-          <span>09:41</span>
-          <span className="status-cluster"><i /><i /><i /></span>
-        </div>
+        <div className="device-status"><span>09:41</span><span>● ● ●</span></div>
         <div className="camera-hole" />
-        <div className="wheel-app-head">
-          <div className="pass-logo small">W</div>
-          <div>
-            <span className="screen-kicker">LE FOURNIL</span>
-            <strong>Votre chance du jour</strong>
-          </div>
-        </div>
-        <div className="wheel-area">
-          <span className="wheel-pointer" />
-          <div className="android-wheel">
-            <span className="wheel-label wheel-label-a">-10%</span>
-            <span className="wheel-label wheel-label-b">Perdu</span>
-            <span className="wheel-label wheel-label-c">Café</span>
-            <span className="wheel-label wheel-label-d">-20%</span>
-            <div className="wheel-hub">W</div>
-          </div>
-        </div>
-        <button className="spin-button" type="button" tabIndex={-1}>Lancer la roue</button>
-        <div className="wheel-meta"><span>1 participation</span><span>aujourd&apos;hui</span></div>
+        <div className="wheel-app-head"><div className="pass-logo small">W</div><div><span>LE FOURNIL</span><strong>Votre chance du jour</strong></div></div>
+        <div className="wheel-area"><span className="wheel-pointer" /><div className="android-wheel"><span>-10%</span><span>PERDU</span><span>CAFÉ</span><span>-20%</span><div className="wheel-hub">W</div></div></div>
+        <div className="spin-button">Lancer la roue</div>
+        <div className="wheel-win"><span>GAGNÉ</span><strong>Café offert</strong><small>Coupon valable lors de votre prochaine visite</small></div>
         <div className="android-gesture" />
       </div>
     </div>
@@ -134,69 +59,35 @@ function Samsung({ compact = false }: { compact?: boolean }) {
 }
 
 function DashboardMockup() {
+  const rows = [
+    ["Le Fournil", "Fidélité", "Actif", "À suivre"],
+    ["Nova Beauty", "Roue", "Démo prête", "Visite 14:30"],
+    ["Barber 22", "Fidélité + Roue", "Actif", "Bonne santé"],
+  ] as const;
+
   return (
     <div className="dashboard-frame" aria-label="Aperçu du futur cockpit revendeur WALS">
-      <div className="dashboard-topbar">
-        <div className="dashboard-dots"><i /><i /><i /></div>
-        <span>app.wals.fr / cockpit</span>
-        <span className="dashboard-live">Aperçu</span>
-      </div>
+      <div className="dashboard-topbar"><span className="dashboard-dots"><i /><i /><i /></span><span>app.wals.fr / cockpit</span><b>Aperçu produit</b></div>
       <div className="dashboard-body">
         <aside className="dashboard-sidebar">
           <div className="dashboard-brand"><span>W</span><strong>WALS</strong></div>
-          <nav>
-            <a className="active">Vue terrain</a>
-            <a>Prospects</a>
-            <a>Commerces</a>
-            <a>Démonstrations</a>
-            <a>Activité</a>
-          </nav>
-          <div className="sidebar-status"><i /> Bientôt disponible</div>
+          <nav><a className="active">Vue terrain</a><a>Prospects</a><a>Démonstrations</a><a>Commerces</a><a>Activité</a></nav>
+          <div className="sidebar-status"><i /> Espace revendeur</div>
         </aside>
         <div className="dashboard-main">
-          <div className="dashboard-heading">
-            <div><span>VOTRE ACTIVITÉ</span><h3>Bonjour.</h3></div>
-            <div className="dashboard-cta">+ Nouvelle démo</div>
-          </div>
+          <div className="dashboard-heading"><div><span>VOTRE ACTIVITÉ</span><h3>Bonjour.</h3></div><div className="dashboard-cta">+ Nouvelle démo</div></div>
           <div className="dashboard-metrics">
-            <div><span>Prospects suivis</span><strong>24</strong><small>Votre pipeline</small></div>
-            <div><span>Démos en cours</span><strong>07</strong><small>À présenter ou relancer</small></div>
+            <div><span>Prospects à visiter</span><strong>12</strong><small>4 aujourd'hui</small></div>
+            <div><span>Démos prêtes</span><strong>07</strong><small>Personnalisées</small></div>
             <div><span>Commerces actifs</span><strong>18</strong><small>Votre portefeuille</small></div>
           </div>
           <div className="dashboard-grid">
-            <div className="dashboard-panel activity-panel">
-              <div className="panel-title"><strong>Activité commerciale</strong><span>30 jours</span></div>
-              <div className="activity-chart">
-                <svg viewBox="0 0 520 170" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ff6d1b" stopOpacity=".22" />
-                      <stop offset="100%" stopColor="#ff6d1b" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  <path className="chart-area" d="M0 145 C45 140, 55 120, 92 126 S150 90, 186 102 S250 72, 286 83 S345 40, 383 62 S445 28, 520 38 L520 170 L0 170 Z" fill="url(#chartFill)" />
-                  <path className="chart-line" d="M0 145 C45 140, 55 120, 92 126 S150 90, 186 102 S250 72, 286 83 S345 40, 383 62 S445 28, 520 38" fill="none" stroke="#ff6d1b" strokeWidth="3" strokeLinecap="round" />
-                </svg>
-                <div className="chart-grid-lines"><i /><i /><i /><i /></div>
-              </div>
-            </div>
-            <div className="dashboard-panel pulse-panel">
-              <div className="panel-title"><strong>Portefeuille</strong><span>Aperçu</span></div>
-              <div className="pulse-score"><span>87</span><small>/100</small></div>
-              <p>Comptes actifs</p>
-              <div className="pulse-bars"><i /><i /><i /><i /><i /><i /><i /></div>
-            </div>
+            <div className="dashboard-panel"><div className="panel-title"><strong>Pipeline terrain</strong><span>Cette semaine</span></div><div className="pipeline"><span><b>18</b><small>Prospects</small></span><i /><span><b>11</b><small>Démos</small></span><i /><span><b>5</b><small>Signés</small></span></div></div>
+            <div className="dashboard-panel health-panel"><div className="panel-title"><strong>Santé portefeuille</strong><span>Live</span></div><strong className="health-score">87<small>/100</small></strong><p>3 comptes à relancer</p></div>
           </div>
           <div className="dashboard-table">
-            <div className="table-head"><span>Commerce</span><span>Solution</span><span>État</span><span>Interactions</span></div>
-            {dashboardRows.map(([name, module, state, value]) => (
-              <div className="table-row" key={name}>
-                <span><i>{name.slice(0, 1)}</i>{name}</span>
-                <span>{module}</span>
-                <span><b className={state === "Actif" ? "status-active" : "status-demo"}>{state}</b></span>
-                <span>{value}</span>
-              </div>
-            ))}
+            <div className="table-head"><span>Commerce</span><span>Solution</span><span>État</span><span>Prochaine action</span></div>
+            {rows.map(([name, module, state, action]) => <div className="table-row" key={name}><span><i>{name[0]}</i>{name}</span><span>{module}</span><span><b>{state}</b></span><span>{action}</span></div>)}
           </div>
         </div>
       </div>
@@ -205,236 +96,104 @@ function DashboardMockup() {
 }
 
 export function LandingExperience() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.14, rootMargin: "0px 0px -6% 0px" },
-    );
-
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
-
-  function moveStage(event: React.PointerEvent<HTMLDivElement>) {
-    if (event.pointerType === "touch" || !stageRef.current) return;
-    const rect = stageRef.current.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    stageRef.current.style.setProperty("--mx", x.toFixed(3));
-    stageRef.current.style.setProperty("--my", y.toFixed(3));
-  }
-
-  function resetStage() {
-    stageRef.current?.style.setProperty("--mx", "0");
-    stageRef.current?.style.setProperty("--my", "0");
-  }
-
-  function closeMenu() {
-    setMenuOpen(false);
-  }
-
   return (
     <main className="site-shell">
-      <header className="site-header">
-        <div className="header-inner">
-          <a href="#top" aria-label="Revenir en haut de WALS" onClick={closeMenu}><BrandMark /></a>
-          <nav className="desktop-nav" aria-label="Navigation principale">
-            <a href="#produit">Les solutions</a>
-            <a href="#terrain">Pour vendre</a>
-            <a href="#cockpit">Votre cockpit</a>
-          </nav>
-          <div className="header-status"><span className="status-dot" /> Accès revendeurs bientôt</div>
-          <button className={`menu-toggle ${menuOpen ? "is-open" : ""}`} type="button" aria-label="Ouvrir la navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
-            <span /><span />
-          </button>
-        </div>
-        <div className={`mobile-nav ${menuOpen ? "is-open" : ""}`}>
-          <a href="#produit" onClick={closeMenu}>Les solutions</a>
-          <a href="#terrain" onClick={closeMenu}>Pour vendre</a>
-          <a href="#cockpit" onClick={closeMenu}>Votre cockpit</a>
-          <span>WALS arrive bientôt pour les revendeurs</span>
-        </div>
-      </header>
+      <HeaderClient />
 
-      <section id="top" className="hero-section">
-        <div className="hero-grid" />
-        <div className="hero-orbit hero-orbit-a" />
-        <div className="hero-orbit hero-orbit-b" />
-        <div className="hero-glow hero-glow-orange" />
-        <div className="hero-glow hero-glow-blue" />
+      <section id="top" className="hero-section" data-motion-section>
+        <div className="hero-grid" /><div className="hero-orbit hero-orbit-a" /><div className="hero-orbit hero-orbit-b" /><div className="hero-glow hero-glow-orange" /><div className="hero-glow hero-glow-blue" />
         <div className="site-container hero-layout">
           <div className="hero-copy">
-            <div className="intro intro-one launch-pill"><span className="launch-signal"><i /></span> WALS arrive bientôt</div>
-            <p className="intro intro-two hero-overline">PLATEFORME POUR REVENDEURS · DÉMARCHEURS · AGENCES</p>
-            <h1 className="intro intro-three hero-title">
-              <span>PROSPECTEZ.</span>
-              <span className="hero-title-outline">DÉMONTREZ.</span>
-              <span>VENDEZ.</span>
-              <span className="hero-title-orange">DÉVELOPPEZ.</span>
-            </h1>
-            <p className="intro intro-four hero-lead">WALS prépare la plateforme qui vous permettra de proposer aux commerces des solutions digitales modernes, de créer des démonstrations qui se vendent visuellement et de piloter votre activité depuis un seul espace.</p>
-            <div className="intro intro-five hero-actions">
-              <a className="primary-link" href="#produit">Découvrir ce qui arrive <ArrowIcon /></a>
-              <span className="build-note"><i /> Accès revendeurs prochainement</span>
-            </div>
+            <div className="launch-pill"><span className="launch-signal"><i /></span> Plateforme en développement</div>
+            <p className="hero-overline">POUR REVENDEURS · COMMERCIAUX INDÉPENDANTS · AGENCES</p>
+            <h1 className="hero-title">Transformez votre prospection terrain <span>en offres digitales à revendre.</span></h1>
+            <p className="hero-lead">Fidélité digitale, roue interactive, démonstrations personnalisées et pilotage commercial. WALS prépare tout ce qu'il faut pour arriver chez un commerce avec une offre concrète, visuelle et prête à présenter.</p>
+            <div className="hero-actions"><a className="primary-link" href="#solutions">Découvrir WALS <ArrowIcon /></a><span className="build-note"><i /> Pensé pour la vente terrain</span></div>
+            <div className="hero-manifest" aria-label="Promesse WALS"><span>PROSPECTEZ.</span><span>DÉMONTREZ.</span><span>VENDEZ.</span><span>DÉVELOPPEZ.</span></div>
           </div>
-
-          <div className="hero-stage" ref={stageRef} onPointerMove={moveStage} onPointerLeave={resetStage}>
-            <div className="stage-ring stage-ring-one" />
-            <div className="stage-ring stage-ring-two" />
-            <div className="stage-cross stage-cross-a">+</div>
-            <div className="stage-cross stage-cross-b">+</div>
-            <div className="device-wrap iphone-wrap"><Iphone /></div>
-            <div className="device-wrap samsung-wrap"><Samsung /></div>
-            <div className="stage-label stage-label-a"><span>01</span> Fidélité à revendre</div>
-            <div className="stage-label stage-label-b"><span>02</span> Roue digitale</div>
-            <div className="stage-label stage-label-c"><SignalIcon /><strong>Votre cockpit</strong><small>prospects & commerces</small></div>
+          <div className="hero-stage">
+            <div className="stage-ring stage-ring-one" /><div className="stage-ring stage-ring-two" />
+            <div className="device-wrap iphone-wrap"><Iphone /></div><div className="device-wrap samsung-wrap"><Samsung /></div>
+            <div className="stage-label stage-label-a"><span>01</span><strong>WALS Fidélité</strong><small>Apple & Google Wallet</small></div>
+            <div className="stage-label stage-label-b"><span>02</span><strong>WALS Play</strong><small>Roue & coupons</small></div>
+            <div className="stage-label stage-label-c"><span>03</span><strong>WALS Cockpit</strong><small>Prospects & commerces</small></div>
           </div>
         </div>
-        <div className="hero-ticker" aria-hidden="true">
-          <div className="ticker-track">
-            <span>DÉMOS PERSONNALISÉES</span><i />
-            <span>FIDÉLITÉ DIGITALE</span><i />
-            <span>ROUE DIGITALE</span><i />
-            <span>MULTI-COMMERCES</span><i />
-            <span>DÉMOS PERSONNALISÉES</span><i />
-            <span>FIDÉLITÉ DIGITALE</span><i />
-            <span>ROUE DIGITALE</span><i />
-            <span>MULTI-COMMERCES</span><i />
-          </div>
-        </div>
+        <div className="hero-ticker" aria-hidden="true"><div className="ticker-track">{[...sectors.slice(0,4), ...sectors.slice(0,4)].map((item, index) => <span key={`${item}-${index}`}>{item}<i /></span>)}</div></div>
       </section>
 
-      <section id="produit" className="product-section light-section">
+      <section id="solutions" className="solutions-section light-section" data-motion-section>
         <div className="site-container">
-          <div className="section-intro" data-reveal>
-            <p className="section-index">01 / CE QUE VOUS POURREZ VENDRE</p>
-            <div>
-              <h2>Deux solutions.<br /><span>Autant d'offres à construire.</span></h2>
-              <p>La fidélité digitale et la roue resteront totalement indépendantes. Vous pourrez proposer l'une, l'autre ou les deux selon le commerce, son activité et votre propre approche commerciale.</p>
-            </div>
+          <div className="section-intro" data-reveal><p className="section-index">01 / VOTRE GAMME</p><div><h2>Deux solutions à vendre.<br /><span>Un écosystème pour les piloter.</span></h2><p>Construisez une offre adaptée à chaque commerce : fidélité seule, roue seule ou combinaison des deux. WALS Cockpit centralise ensuite vos démonstrations et votre portefeuille.</p></div></div>
+          <div className="product-grid">
+            <article className="product-card loyalty-card" data-reveal><div className="product-copy"><span className="product-index">01</span><span className="product-tag">WALS FIDÉLITÉ</span><h3>Une fidélité digitale que le commerçant comprend en quelques secondes.</h3><p>Carte personnalisée dans Apple Wallet ou Google Wallet, points ou tampons, progression, récompenses et identité visuelle du commerce.</p><div className="product-points"><span><CheckIcon /> Démo personnalisable</span><span><CheckIcon /> Points & tampons</span><span><CheckIcon /> Wallet mobile</span></div></div><div className="product-visual loyalty-visual"><Iphone compact /><div className="visual-callout callout-one"><b>7/10</b><span>Tampons</span></div></div></article>
+            <article className="product-card play-card" data-reveal><div className="product-copy"><span className="product-index">02</span><span className="product-tag orange">WALS PLAY</span><h3>Une expérience qui arrête le regard et rend la démo mémorable.</h3><p>Le prospect scanne un QR code, la roue tourne et l'expérience devient immédiatement concrète : gains, coupons, règles, limites et branding.</p><div className="product-points"><span><CheckIcon /> QR immédiat</span><span><CheckIcon /> Gains & coupons</span><span><CheckIcon /> Règles configurables</span></div></div><div className="product-visual play-visual"><Samsung compact /><div className="visual-callout callout-two"><b>Café offert</b><span>Exemple de gain</span></div></div></article>
           </div>
-
-          <article className="feature-story loyalty-story" data-reveal>
-            <div className="story-number">01</div>
-            <div className="story-copy">
-              <span className="story-tag">FIDÉLITÉ DIGITALE</span>
-              <h3>Une solution simple à montrer. Facile à comprendre.</h3>
-              <p>Présentez au commerçant une carte personnalisée qui s'intègre directement dans Apple Wallet ou Google Wallet, avec points ou tampons, progression, récompenses et identité visuelle à ses couleurs.</p>
-              <div className="story-specs">
-                <span><AppleMark /> Apple Wallet</span>
-                <span>Points & tampons</span>
-                <span>Personnalisation</span>
-              </div>
-            </div>
-            <div className="story-visual iphone-story-visual">
-              <div className="story-orbit" />
-              <Iphone compact />
-              <div className="micro-card micro-card-progress"><span>8 / 10</span><small>tampons</small></div>
-              <div className="micro-card micro-card-wallet"><AppleMark /><span>Démo prête à montrer</span></div>
-            </div>
-          </article>
-
-          <article className="feature-story wheel-story" data-reveal>
-            <div className="story-number">02</div>
-            <div className="story-copy">
-              <span className="story-tag orange">ROUE DIGITALE</span>
-              <h3>Une démo qui capte l'attention en quelques secondes.</h3>
-              <p>Faites scanner un QR code au commerçant et montrez immédiatement l'expérience. Gains, pertes, coupons, limites, probabilités et branding pourront être adaptés pour construire une offre concrète et visuelle.</p>
-              <div className="story-specs">
-                <span><AndroidMark /> Tous mobiles</span>
-                <span>QR code</span>
-                <span>Configuration sur mesure</span>
-              </div>
-            </div>
-            <div className="story-visual samsung-story-visual">
-              <div className="story-orbit orange-orbit" />
-              <Samsung compact />
-              <div className="micro-card micro-card-gain"><span>-10%</span><small>exemple de gain</small></div>
-              <div className="micro-card micro-card-limit"><span>1×</span><small>règle configurable</small></div>
-            </div>
-          </article>
         </div>
       </section>
 
-      <section id="terrain" className="field-section dark-section">
-        <div className="field-noise" />
+      <section id="business" className="business-section dark-section" data-motion-section>
         <div className="site-container">
-          <div className="field-heading" data-reveal>
-            <p className="section-index light">02 / CONÇU POUR VENDRE</p>
-            <h2>Votre terrain. Votre méthode.</h2>
-            <p>WALS prépare les outils pour accélérer les deux.</p>
+          <div className="business-heading" data-reveal><p className="section-index light">02 / VOTRE BUSINESS</p><h2>Votre offre.<br />Vos prix.<br /><span>Vos clients.</span></h2><p>WALS ne doit pas seulement vous donner un produit à montrer. La plateforme est pensée pour vous aider à construire une activité commerciale autour de solutions digitales simples à démontrer et à revendre.</p></div>
+          <div className="business-pillars">
+            <article data-reveal><span>01</span><h3>Construisez votre offre</h3><p>Fidélité, roue ou combinaison des deux : adaptez votre proposition à chaque commerce et à votre méthode de vente.</p></article>
+            <article data-reveal><span>02</span><h3>Fixez votre tarif</h3><p>Vous gardez la maîtrise de votre proposition commerciale et de la valeur que vous apportez au commerce.</p></article>
+            <article data-reveal><span>03</span><h3>Développez votre portefeuille</h3><p>Prospects, démonstrations et commerces actifs restent réunis dans un cockpit construit autour de votre activité.</p></article>
           </div>
-          <div className="workflow-rail" data-reveal>
-            <div className="workflow-line"><span /></div>
-            {workflow.map(([number, title, copy]) => (
-              <article className="workflow-step" key={number}>
-                <div className="workflow-node"><span>{number}</span></div>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-          <div className="field-statement" data-reveal>
-            <div className="statement-mark">W</div>
-            <p>Le commerçant ne doit pas avoir à imaginer le résultat. Votre démo doit lui montrer immédiatement ce que ses propres clients pourront utiliser.</p>
-            <span>WALS / vente terrain</span>
-          </div>
+          <div className="business-metric-strip" data-reveal><div><strong>0</strong><span>application WALS à imposer au client final</span></div><div><strong>2</strong><span>solutions indépendantes à commercialiser</span></div><div><strong>1</strong><span>cockpit pour piloter votre activité</span></div></div>
         </div>
       </section>
 
-      <section id="cockpit" className="cockpit-section light-section">
+      <section id="terrain" className="field-section" data-motion-section>
         <div className="site-container">
-          <div className="cockpit-copy" data-reveal>
-            <p className="section-index">03 / VOTRE COCKPIT</p>
-            <h2>Votre activité commerciale, enfin au même endroit.</h2>
-            <p>WALS prépare un espace pensé pour suivre vos prospects, créer vos démonstrations, gérer vos commerces signés et garder une vision claire de votre activité sans multiplier les logiciels.</p>
+          <div className="field-heading" data-reveal><p className="section-index">03 / CONÇU POUR LE TERRAIN</p><h2>Du premier prospect<br /><span>au commerce actif.</span></h2><p>Une seule histoire. Un seul commerce fictif. Tout le parcours WALS en quelques secondes.</p></div>
+          <div className="workflow-cinema" data-reveal>
+            <div className="workflow-step-card step-prospect"><span>01</span><small>PROSPECT</small><strong>Le Fournil</strong><p>Boulangerie · 1 établissement</p><b>À préparer</b></div>
+            <div className="workflow-arrow"><i /><i /><i /></div>
+            <div className="workflow-step-card step-demo"><span>02</span><small>DÉMO</small><strong>Le Fournil</strong><div className="mini-brand"><b>W</b><em>Aux couleurs du commerce</em></div><b>Prête à montrer</b></div>
+            <div className="workflow-arrow"><i /><i /><i /></div>
+            <div className="workflow-step-card step-scan"><span>03</span><small>PRÉSENTATION</small><div className="fake-qr" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><strong>Scannez la démo</strong><b>Expérience mobile</b></div>
+            <div className="workflow-arrow"><i /><i /><i /></div>
+            <div className="workflow-step-card step-signed"><span>04</span><small>VENTE</small><strong>Le Fournil</strong><div className="signed-badge"><CheckIcon /> Signé</div><b>Commerce actif</b></div>
           </div>
-          <div className="dashboard-stage" data-reveal>
-            <div className="dashboard-halo" />
-            <div className="dashboard-caption dashboard-caption-a"><span>A</span><strong>Pipeline</strong><small>prospects & démos</small></div>
-            <div className="dashboard-caption dashboard-caption-b"><span>B</span><strong>Portefeuille</strong><small>commerces & activité</small></div>
-            <DashboardMockup />
+          <div className="field-statement" data-reveal><span>PRINCIPE WALS</span><p>Le commerçant ne doit pas avoir à imaginer le résultat. <strong>Votre démo doit déjà lui montrer ce que ses propres clients pourront utiliser.</strong></p></div>
+        </div>
+      </section>
+
+      <section className="dual-view-section light-section" data-motion-section>
+        <div className="site-container">
+          <div className="dual-view-heading" data-reveal><p className="section-index">04 / DEUX CÔTÉS, UNE SEULE PLATEFORME</p><h2>Simple devant le commerce.<br /><span>Puissant derrière.</span></h2></div>
+          <div className="dual-view-grid">
+            <article className="dual-panel merchant-panel" data-reveal><div className="dual-label">CE QUE LE COMMERCE VOIT</div><h3>Une expérience immédiatement compréhensible.</h3><ul><li><CheckIcon /> Une carte à ses couleurs</li><li><CheckIcon /> Une roue accessible par QR</li><li><CheckIcon /> Des récompenses visibles</li><li><CheckIcon /> Une expérience pensée mobile</li></ul><div className="dual-phone-stack"><div><Iphone compact /></div><div><Samsung compact /></div></div></article>
+            <article className="dual-panel reseller-panel" data-reveal><div className="dual-label">CE QUE VOUS GÉREZ</div><h3>Tout ce qu'il faut pour vendre et suivre.</h3><ul><li><CheckIcon /> Prospects et visites</li><li><CheckIcon /> Démonstrations personnalisées</li><li><CheckIcon /> Commerces et solutions actives</li><li><CheckIcon /> Activité et prochaines actions</li></ul><div className="mini-cockpit"><div><span>Nova Beauty</span><b>Démo prête</b></div><div><span>Le Fournil</span><b className="active">Actif</b></div><div><span>Barber 22</span><b className="active">Actif</b></div></div></article>
           </div>
         </div>
       </section>
 
-      <section className="build-section">
-        <div className="build-grid" />
-        <div className="site-container build-layout" data-reveal>
-          <div className="build-code">WALS / BIENTÔT</div>
-          <div className="build-copy">
-            <span className="launch-pill inverse"><span className="launch-signal"><i /></span> Plateforme en développement</span>
-            <h2>WALS arrive bientôt.<br />Préparez votre prochaine offre à vendre.</h2>
-            <p>Nous construisons actuellement une plateforme pensée pour les revendeurs, démarcheurs indépendants et agences qui veulent commercialiser des solutions digitales auprès des commerces. Démonstrations personnalisées, fidélité digitale, roue, gestion multi-commerces et cockpit commercial sont en préparation.</p>
-            <div className="build-roadmap">
-              <span><i className="done" /> Expériences produits</span>
-              <span><i className="done" /> Vitrine</span>
-              <span><i className="current" /> Cockpit revendeur</span>
-              <span><i /> Ouverture des accès</span>
-            </div>
-          </div>
+      <section className="sectors-section" data-motion-section>
+        <div className="site-container sectors-heading" data-reveal><p className="section-index light">05 / VOTRE TERRAIN DE JEU</p><h2>Des commerces partout.<br /><span>Des offres à construire partout.</span></h2></div>
+        <div className="sectors-marquee" aria-hidden="true"><div>{[...sectors, ...sectors].map((item, index) => <span key={`${item}-${index}`}>{item}<i /></span>)}</div></div>
+      </section>
+
+      <section id="cockpit" className="cockpit-section light-section" data-motion-section>
+        <div className="site-container">
+          <div className="cockpit-copy" data-reveal><p className="section-index">06 / WALS COCKPIT</p><h2>Un cockpit qui parle votre langage commercial.</h2><p>Pas un CRM générique de plus. WALS Cockpit est pensé autour des visites terrain, des démos personnalisées, des solutions vendues et de la santé de votre portefeuille.</p><div className="cockpit-chips"><span>Prospects à visiter</span><span>Démos prêtes</span><span>Solutions actives</span><span>Prochaine action</span><span>Santé portefeuille</span></div></div>
+          <div className="dashboard-stage" data-reveal><div className="dashboard-halo" /><DashboardMockup /></div>
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="site-container footer-inner">
-          <BrandMark />
-          <p>La plateforme de vente et de gestion pensée pour les revendeurs de solutions aux commerces. Bientôt disponible.</p>
-          <span>© 2026 WALS</span>
+      <section className="faq-section" data-motion-section>
+        <div className="site-container faq-layout">
+          <div className="faq-heading" data-reveal><p className="section-index">07 / QUESTIONS REVENDEURS</p><h2>Ce qu'il faut savoir avant l'ouverture.</h2><p>WALS est encore en développement. Voici déjà les principes qui structurent la plateforme et l'expérience revendeur.</p></div>
+          <div className="faq-list" data-reveal>{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div>
         </div>
-      </footer>
+      </section>
+
+      <section className="build-section" data-motion-section>
+        <div className="build-grid" /><div className="site-container build-layout" data-reveal><div className="build-code">WALS / 2026</div><div className="build-copy"><span className="launch-pill inverse"><span className="launch-signal"><i /></span> En développement</span><h2>Le terrain est prêt.<br />WALS arrive.</h2><p>La fidélité, la roue, les démos personnalisées et le cockpit revendeur prennent forme pour vous permettre de construire une offre digitale crédible, démontrable et simple à vendre aux commerces.</p><div className="build-roadmap"><span><i className="done" /> Expériences produits</span><span><i className="done" /> Vitrine</span><span><i className="current" /> Cockpit revendeur</span><span><i /> Ouverture des accès</span></div></div></div>
+      </section>
+
+      <footer className="site-footer"><div className="site-container footer-inner"><div className="footer-brand"><BrandMark /><p>La plateforme de vente terrain pensée pour les revendeurs de solutions digitales aux commerces.</p></div><div className="footer-links"><div><strong>Produit</strong><a href="#solutions">Fidélité</a><a href="#solutions">Roue</a><a href="#cockpit">Cockpit</a></div><div><strong>WALS</strong><a href="#business">Pour revendre</a><a href="#terrain">Vente terrain</a><a href="#top">En développement</a></div><div><strong>Légal</strong><span>Mentions légales à venir</span><span>Confidentialité à venir</span></div></div><div className="footer-bottom"><span>© 2026 WALS</span><span>Conçu pour la prospection terrain.</span></div></div></footer>
     </main>
   );
 }
