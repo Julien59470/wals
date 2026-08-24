@@ -1,0 +1,24 @@
+/* Supprime les cadres rectangulaires générés par les effets de tilt au survol. */
+.tilt-shine {
+  display: none !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.motion-tilt,
+.motion-tilt:hover,
+.motion-tilt:focus,
+.motion-tilt:focus-visible {
+  outline: none !important;
+}
+
+.build-copy.motion-tilt:hover,
+.field-statement.motion-tilt:hover {
+  box-shadow: none !important;
+}
+
+.story-visual.motion-tilt:hover,
+.dashboard-frame.motion-tilt:hover {
+  box-shadow: 0 32px 72px rgba(6, 19, 38, .12) !important;
+}

@@ -6,6 +6,7 @@ import "./stability.css";
 import "./polish.css";
 import "./motion.css";
 import "./navbar-static.css";
+import "./hover-fixes.css";
 
 const inter = Inter({
   subsets: ["latin"],
