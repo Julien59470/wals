@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 import "./stability.css";
+import "./polish.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
   description:
     "WALS construit une plateforme pour préparer, présenter et piloter des solutions digitales auprès des commerces. Fidélité, roue digitale et cockpit multi-commerces.",
   metadataBase: new URL("https://wals.fr"),
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "WALS — La plateforme terrain des démarcheurs",
     description:
