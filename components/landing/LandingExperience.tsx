@@ -5,16 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "@/components/landing/BrandMark";
 
 const workflow = [
-  ["01", "Préparer", "Une démo prête avant d'entrer chez le commerce."],
-  ["02", "Montrer", "Le commerçant voit immédiatement le rendu sur mobile."],
-  ["03", "Activer", "Le bon module, les bonnes règles, le bon branding."],
-  ["04", "Piloter", "Prospects, clients et activité réunis dans le cockpit."],
+  ["01", "Attirer", "Un QR code transforme un passage en expérience simple et immédiate."],
+  ["02", "Fidéliser", "Votre carte de fidélité reste dans le téléphone de vos clients, toujours à portée de main."],
+  ["03", "Récompenser", "Tampons, points, avantages ou roue digitale : vous choisissez la mécanique qui vous ressemble."],
+  ["04", "Suivre", "Retrouvez l’activité, les visites et les récompenses depuis un espace clair et centralisé."],
 ] as const;
 
 const dashboardRows = [
-  ["Le Fournil", "Fidélité", "Actif", "1 284"],
-  ["Nova Beauty", "Roue", "Démo", "—"],
-  ["Barber 22", "Fidélité + Roue", "Actif", "836"],
+  ["Emma D.", "Fidélité", "8 / 10", "12"],
+  ["Lucas M.", "Fidélité", "5 / 10", "8"],
+  ["Inès R.", "Roue + Fidélité", "Actif", "11"],
 ] as const;
 
 function SignalIcon() {
@@ -135,37 +135,37 @@ function Samsung({ compact = false }: { compact?: boolean }) {
 
 function DashboardMockup() {
   return (
-    <div className="dashboard-frame" aria-label="Aperçu du futur cockpit WALS">
+    <div className="dashboard-frame" aria-label="Aperçu du futur espace commerçant WALS">
       <div className="dashboard-topbar">
         <div className="dashboard-dots"><i /><i /><i /></div>
-        <span>app.wals.fr / cockpit</span>
-        <span className="dashboard-live">Prototype</span>
+        <span>app.wals.fr / mon-commerce</span>
+        <span className="dashboard-live">Aperçu</span>
       </div>
       <div className="dashboard-body">
         <aside className="dashboard-sidebar">
           <div className="dashboard-brand"><span>W</span><strong>WALS</strong></div>
           <nav>
-            <a className="active">Vue terrain</a>
-            <a>Prospects</a>
-            <a>Commerces</a>
-            <a>Démonstrations</a>
+            <a className="active">Vue d&apos;ensemble</a>
+            <a>Mes clients</a>
+            <a>Fidélité</a>
+            <a>Récompenses</a>
             <a>Activité</a>
           </nav>
-          <div className="sidebar-status"><i /> Développement</div>
+          <div className="sidebar-status"><i /> Bientôt disponible</div>
         </aside>
         <div className="dashboard-main">
           <div className="dashboard-heading">
-            <div><span>LUNDI · 24 AOÛT</span><h3>Bonjour Julien.</h3></div>
-            <div className="dashboard-cta">+ Nouvelle démo</div>
+            <div><span>APERÇU DU COMMERCE</span><h3>Bonjour Le Fournil.</h3></div>
+            <div className="dashboard-cta">+ Créer une offre</div>
           </div>
           <div className="dashboard-metrics">
-            <div><span>Commerces suivis</span><strong>24</strong><small>+4 ce mois</small></div>
-            <div><span>Démos en cours</span><strong>07</strong><small>3 à relancer</small></div>
-            <div><span>Activations</span><strong>18</strong><small>75% du portefeuille</small></div>
+            <div><span>Clients fidèles</span><strong>284</strong><small>Votre communauté</small></div>
+            <div><span>Visites ce mois</span><strong>436</strong><small>Activité récente</small></div>
+            <div><span>Récompenses</span><strong>58</strong><small>Avantages débloqués</small></div>
           </div>
           <div className="dashboard-grid">
             <div className="dashboard-panel activity-panel">
-              <div className="panel-title"><strong>Activité terrain</strong><span>30 jours</span></div>
+              <div className="panel-title"><strong>Activité clients</strong><span>30 jours</span></div>
               <div className="activity-chart">
                 <svg viewBox="0 0 520 170" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
@@ -181,14 +181,14 @@ function DashboardMockup() {
               </div>
             </div>
             <div className="dashboard-panel pulse-panel">
-              <div className="panel-title"><strong>Signal</strong><span>Live</span></div>
+              <div className="panel-title"><strong>Engagement</strong><span>Aperçu</span></div>
               <div className="pulse-score"><span>87</span><small>/100</small></div>
-              <p>Portefeuille actif</p>
+              <p>Dynamique clients</p>
               <div className="pulse-bars"><i /><i /><i /><i /><i /><i /><i /></div>
             </div>
           </div>
           <div className="dashboard-table">
-            <div className="table-head"><span>Commerce</span><span>Module</span><span>État</span><span>Interactions</span></div>
+            <div className="table-head"><span>Client</span><span>Parcours</span><span>Progression</span><span>Visites</span></div>
             {dashboardRows.map(([name, module, state, value]) => (
               <div className="table-row" key={name}>
                 <span><i>{name.slice(0, 1)}</i>{name}</span>
@@ -250,20 +250,20 @@ export function LandingExperience() {
         <div className="header-inner">
           <a href="#top" aria-label="Revenir en haut de WALS" onClick={closeMenu}><BrandMark /></a>
           <nav className="desktop-nav" aria-label="Navigation principale">
-            <a href="#produit">Le produit</a>
-            <a href="#terrain">Le terrain</a>
-            <a href="#cockpit">Le cockpit</a>
+            <a href="#produit">Les expériences</a>
+            <a href="#terrain">Comment ça marche</a>
+            <a href="#cockpit">Votre espace</a>
           </nav>
-          <div className="header-status"><span className="status-dot" /> En développement</div>
+          <div className="header-status"><span className="status-dot" /> Bientôt disponible</div>
           <button className={`menu-toggle ${menuOpen ? "is-open" : ""}`} type="button" aria-label="Ouvrir la navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
             <span /><span />
           </button>
         </div>
         <div className={`mobile-nav ${menuOpen ? "is-open" : ""}`}>
-          <a href="#produit" onClick={closeMenu}>Le produit</a>
-          <a href="#terrain" onClick={closeMenu}>Le terrain</a>
-          <a href="#cockpit" onClick={closeMenu}>Le cockpit</a>
-          <span>Plateforme en cours de développement</span>
+          <a href="#produit" onClick={closeMenu}>Les expériences</a>
+          <a href="#terrain" onClick={closeMenu}>Comment ça marche</a>
+          <a href="#cockpit" onClick={closeMenu}>Votre espace</a>
+          <span>WALS arrive bientôt</span>
         </div>
       </header>
 
@@ -275,18 +275,18 @@ export function LandingExperience() {
         <div className="hero-glow hero-glow-blue" />
         <div className="site-container hero-layout">
           <div className="hero-copy">
-            <div className="intro intro-one launch-pill"><span className="launch-signal"><i /></span> WALS se construit maintenant</div>
-            <p className="intro intro-two hero-overline">PLATEFORME TERRAIN · DÉMARCHEURS & AGENCES</p>
+            <div className="intro intro-one launch-pill"><span className="launch-signal"><i /></span> WALS arrive bientôt</div>
+            <p className="intro intro-two hero-overline">FIDÉLISATION DIGITALE · SIMPLE · SANS APPLICATION À INSTALLER</p>
             <h1 className="intro intro-three hero-title">
-              <span>PRÉPAREZ.</span>
-              <span className="hero-title-outline">MONTREZ.</span>
-              <span>ACTIVEZ.</span>
-              <span className="hero-title-orange">PILOTEZ.</span>
+              <span>FIDÉLISEZ.</span>
+              <span className="hero-title-outline">ENGAGEZ.</span>
+              <span>RÉCOMPENSEZ.</span>
+              <span className="hero-title-orange">SIMPLEMENT.</span>
             </h1>
-            <p className="intro intro-four hero-lead">WALS réunira dans un même cockpit les outils nécessaires pour présenter des expériences digitales aux commerçants, les déployer et suivre chaque compte sur le terrain.</p>
+            <p className="intro intro-four hero-lead">WALS prépare une nouvelle façon de faire revenir vos clients : une fidélité digitale élégante dans leur téléphone, des expériences interactives qui donnent envie de participer et un espace simple pour tout piloter.</p>
             <div className="intro intro-five hero-actions">
-              <a className="primary-link" href="#produit">Voir ce qui arrive <ArrowIcon /></a>
-              <span className="build-note"><i /> Aucun accès public pour le moment</span>
+              <a className="primary-link" href="#produit">Découvrir ce qui arrive <ArrowIcon /></a>
+              <span className="build-note"><i /> Ouverture prochaine</span>
             </div>
           </div>
 
@@ -297,21 +297,21 @@ export function LandingExperience() {
             <div className="stage-cross stage-cross-b">+</div>
             <div className="device-wrap iphone-wrap"><Iphone /></div>
             <div className="device-wrap samsung-wrap"><Samsung /></div>
-            <div className="stage-label stage-label-a"><span>01</span> Fidélité Wallet</div>
+            <div className="stage-label stage-label-a"><span>01</span> Carte de fidélité</div>
             <div className="stage-label stage-label-b"><span>02</span> Roue digitale</div>
-            <div className="stage-label stage-label-c"><SignalIcon /><strong>Cockpit</strong><small>multi-commerces</small></div>
+            <div className="stage-label stage-label-c"><SignalIcon /><strong>Votre espace</strong><small>simple & centralisé</small></div>
           </div>
         </div>
         <div className="hero-ticker" aria-hidden="true">
           <div className="ticker-track">
-            <span>FIDÉLITÉ DIGITALE</span><i />
+            <span>CARTE WALLET</span><i />
             <span>ROUE DIGITALE</span><i />
-            <span>DÉMOS TERRAIN</span><i />
-            <span>MULTI-COMMERCES</span><i />
-            <span>FIDÉLITÉ DIGITALE</span><i />
+            <span>RÉCOMPENSES</span><i />
+            <span>EXPÉRIENCE CLIENT</span><i />
+            <span>CARTE WALLET</span><i />
             <span>ROUE DIGITALE</span><i />
-            <span>DÉMOS TERRAIN</span><i />
-            <span>MULTI-COMMERCES</span><i />
+            <span>RÉCOMPENSES</span><i />
+            <span>EXPÉRIENCE CLIENT</span><i />
           </div>
         </div>
       </section>
@@ -319,10 +319,10 @@ export function LandingExperience() {
       <section id="produit" className="product-section light-section">
         <div className="site-container">
           <div className="section-intro" data-reveal>
-            <p className="section-index">01 / LE PRODUIT</p>
+            <p className="section-index">01 / LES EXPÉRIENCES</p>
             <div>
-              <h2>Deux expériences.<br /><span>Un seul terrain de jeu.</span></h2>
-              <p>La fidélité et la roue resteront deux modules indépendants. Le démarcheur choisira ce qui est pertinent pour le commerce, sans imposer un parcours unique.</p>
+              <h2>Deux façons de donner<br /><span>envie de revenir.</span></h2>
+              <p>WALS vous permettra d’activer la bonne expérience selon votre commerce : fidéliser sur la durée avec une carte digitale, créer de l’engagement avec une roue interactive, ou combiner les deux.</p>
             </div>
           </div>
 
@@ -330,11 +330,11 @@ export function LandingExperience() {
             <div className="story-number">01</div>
             <div className="story-copy">
               <span className="story-tag">FIDÉLITÉ DIGITALE</span>
-              <h3>La carte reste dans la poche. Pas dans un tiroir.</h3>
-              <p>Une expérience pensée pour Apple Wallet et Google Wallet : tampons ou points, progression, récompenses et identité visuelle du commerce.</p>
+              <h3>Votre fidélité, toujours dans leur téléphone.</h3>
+              <p>Vos clients pourront conserver votre carte dans Apple Wallet ou Google Wallet. Plus de carte papier oubliée : leur progression, leurs points ou leurs tampons restent accessibles en quelques secondes.</p>
               <div className="story-specs">
                 <span><AppleMark /> Apple Wallet</span>
-                <span>Progression</span>
+                <span>Points & tampons</span>
                 <span>Récompenses</span>
               </div>
             </div>
@@ -342,7 +342,7 @@ export function LandingExperience() {
               <div className="story-orbit" />
               <Iphone compact />
               <div className="micro-card micro-card-progress"><span>8 / 10</span><small>tampons</small></div>
-              <div className="micro-card micro-card-wallet"><AppleMark /><span>Dans Wallet</span></div>
+              <div className="micro-card micro-card-wallet"><AppleMark /><span>Toujours dans Wallet</span></div>
             </div>
           </article>
 
@@ -350,12 +350,12 @@ export function LandingExperience() {
             <div className="story-number">02</div>
             <div className="story-copy">
               <span className="story-tag orange">ROUE DIGITALE</span>
-              <h3>Un scan. Une tension. Un résultat.</h3>
-              <p>Une roue configurable pour lancer une mécanique simple à comprendre : gains, pertes, coupons, limites, probabilités et identité du commerce.</p>
+              <h3>Transformez un passage en moment à jouer.</h3>
+              <p>Un scan, quelques secondes, une récompense possible. La roue digitale vous permettra de créer une animation simple autour de votre commerce avec vos propres gains, règles et identité visuelle.</p>
               <div className="story-specs">
-                <span><AndroidMark /> Android</span>
+                <span><AndroidMark /> Tous mobiles</span>
                 <span>QR code</span>
-                <span>Probabilités</span>
+                <span>Gains personnalisés</span>
               </div>
             </div>
             <div className="story-visual samsung-story-visual">
@@ -372,9 +372,9 @@ export function LandingExperience() {
         <div className="field-noise" />
         <div className="site-container">
           <div className="field-heading" data-reveal>
-            <p className="section-index light">02 / LE TERRAIN</p>
-            <h2>Le produit suit le rythme du démarcheur.</h2>
-            <p>Pas l’inverse.</p>
+            <p className="section-index light">02 / POUR VOTRE COMMERCE</p>
+            <h2>Pensé pour être simple.</h2>
+            <p>Pour vous comme pour vos clients.</p>
           </div>
           <div className="workflow-rail" data-reveal>
             <div className="workflow-line"><span /></div>
@@ -388,8 +388,8 @@ export function LandingExperience() {
           </div>
           <div className="field-statement" data-reveal>
             <div className="statement-mark">W</div>
-            <p>Le but n’est pas d’ajouter un outil de plus. Le but est de supprimer les allers-retours entre plusieurs outils.</p>
-            <span>WALS / principe produit</span>
+            <p>Vos clients n’auront pas une nouvelle application à apprendre. Ils retrouveront simplement votre expérience là où ils sont déjà : sur leur téléphone.</p>
+            <span>WALS / expérience client</span>
           </div>
         </div>
       </section>
@@ -397,14 +397,14 @@ export function LandingExperience() {
       <section id="cockpit" className="cockpit-section light-section">
         <div className="site-container">
           <div className="cockpit-copy" data-reveal>
-            <p className="section-index">03 / LE COCKPIT</p>
-            <h2>Le centre de gravité de WALS.</h2>
-            <p>Le commerçant voit son expérience. Le démarcheur, lui, doit voir son activité entière : prospects, démonstrations, activations, signaux et comptes à suivre.</p>
+            <p className="section-index">03 / VOTRE ESPACE</p>
+            <h2>Tout ce qui compte, au même endroit.</h2>
+            <p>WALS prépare un espace commerçant clair pour suivre vos clients, leur progression, les visites, les récompenses et l’activité de vos expériences sans multiplier les outils.</p>
           </div>
           <div className="dashboard-stage" data-reveal>
             <div className="dashboard-halo" />
-            <div className="dashboard-caption dashboard-caption-a"><span>A</span><strong>Pipeline</strong><small>prospects & démos</small></div>
-            <div className="dashboard-caption dashboard-caption-b"><span>B</span><strong>Portefeuille</strong><small>commerces actifs</small></div>
+            <div className="dashboard-caption dashboard-caption-a"><span>A</span><strong>Activité</strong><small>visites & engagement</small></div>
+            <div className="dashboard-caption dashboard-caption-b"><span>B</span><strong>Fidélité</strong><small>clients & récompenses</small></div>
             <DashboardMockup />
           </div>
         </div>
@@ -413,16 +413,16 @@ export function LandingExperience() {
       <section className="build-section">
         <div className="build-grid" />
         <div className="site-container build-layout" data-reveal>
-          <div className="build-code">WALS / BUILD 001</div>
+          <div className="build-code">WALS / BIENTÔT</div>
           <div className="build-copy">
-            <span className="launch-pill inverse"><span className="launch-signal"><i /></span> En cours de développement</span>
-            <h2>La vitrine est en ligne.<br />La plateforme arrive ensuite.</h2>
-            <p>WALS est actuellement en construction. Les accès, inscriptions et demandes de démonstration ne sont pas encore ouverts. Cette vitrine évoluera au rythme du produit.</p>
+            <span className="launch-pill inverse"><span className="launch-signal"><i /></span> Bientôt disponible</span>
+            <h2>WALS arrive bientôt.<br />Préparez-vous à fidéliser autrement.</h2>
+            <p>Nous finalisons actuellement l’expérience WALS pour proposer aux commerces une solution moderne, simple à utiliser et agréable pour leurs clients. La carte de fidélité, la roue digitale et l’espace commerçant sont en préparation. L’ouverture approche.</p>
             <div className="build-roadmap">
-              <span><i className="done" /> Direction produit</span>
-              <span><i className="done" /> Vitrine</span>
-              <span><i className="current" /> Plateforme</span>
-              <span><i /> Accès partenaires</span>
+              <span><i className="done" /> Expérience client</span>
+              <span><i className="done" /> Carte digitale</span>
+              <span><i className="current" /> Espace commerçant</span>
+              <span><i /> Ouverture</span>
             </div>
           </div>
         </div>
@@ -431,7 +431,7 @@ export function LandingExperience() {
       <footer className="site-footer">
         <div className="site-container footer-inner">
           <BrandMark />
-          <p>Plateforme commerciale en cours de développement.</p>
+          <p>La fidélisation digitale pensée pour les commerces. Bientôt disponible.</p>
           <span>© 2026 WALS</span>
         </div>
       </footer>
