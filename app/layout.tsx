@@ -5,6 +5,7 @@ import "./globals.css";
 import "./stability.css";
 import "./polish.css";
 import "./motion.css";
+import "./navbar-static.css";
 
 const inter = Inter({
   subsets: ["latin"],
