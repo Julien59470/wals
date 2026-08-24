@@ -13,12 +13,12 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "WALS — Plateforme pour revendeurs de solutions digitales aux commerces",
-  description: "Fidélité digitale, roue interactive, démonstrations personnalisées et cockpit terrain : WALS prépare la plateforme des revendeurs, commerciaux indépendants et agences.",
+  title: "WALS — Lancez votre business de fidélité digitale en marque blanche",
+  description: "Créez votre marque, construisez vos offres, choisissez vos prix et développez votre portefeuille de commerces. WALS fournit la technologie de fidélité digitale et les outils pour piloter votre activité.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "WALS — Transformez votre prospection terrain en offres digitales à revendre",
-    description: "Fidélité digitale, roue interactive, démos personnalisées et cockpit revendeur. WALS est conçu pour la vente terrain aux commerces.",
+    title: "WALS — Votre marque. Vos prix. Vos clients. Notre technologie.",
+    description: "Lancez votre propre activité de fidélité digitale : marque blanche, offres personnalisées, revenus mensuels récurrents et Cockpit pour gérer vos commerces.",
     url: siteUrl,
     siteName: "WALS",
     type: "website",
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "WALS — Plateforme de vente terrain pour revendeurs",
-    description: "Fidélité, roue, démos personnalisées et cockpit commercial pour construire une offre digitale à revendre aux commerces.",
+    title: "WALS — Lancez votre business de fidélité digitale",
+    description: "WALS fournit les outils. Le business vous appartient.",
   },
   robots: {
     index: isCanonicalProduction,

@@ -1,29 +1,22 @@
 export const sectors = [
+  "RESTAURANTS",
   "BOULANGERIES",
   "BARBERS",
   "COIFFEURS",
-  "RESTAURANTS",
   "INSTITUTS",
-  "COFFEE SHOPS",
-  "PIZZERIAS",
-  "COMMERCES DE PROXIMITÉ",
-] as const;
-
-export const sectorGroups = [
-  ["FOOD", "Boulangeries · restaurants · coffee shops · pizzerias"],
-  ["BEAUTÉ", "Coiffeurs · barbiers · instituts · ongleries"],
-  ["SERVICES LOCAUX", "Lavage auto · salles · services à visites récurrentes"],
-  ["RETAIL LOCAL", "Commerces indépendants · boutiques · épiceries"],
+  "CAFÉS",
+  "SALLES DE SPORT",
+  "COMMERCES INDÉPENDANTS",
 ] as const;
 
 export const faqs = [
-  ["Puis-je vendre uniquement la fidélité ou uniquement la roue ?", "Oui. WALS Fidélité et WALS Play sont deux solutions indépendantes. Vous pouvez les commercialiser séparément ou les réunir dans une même offre selon le besoin du commerce."],
-  ["Est-ce moi qui construis mon offre commerciale ?", "Oui. Vous choisissez la composition de votre offre, votre accompagnement et le prix facturé au commerce. WALS fournit les outils produits et le cockpit pour les piloter."],
-  ["Dois-je avoir des compétences techniques ?", "Non. Le parcours est pensé pour la vente terrain : préparer une démonstration, la présenter, activer la solution et suivre le commerce sans avoir à développer ni déployer une infrastructure technique vous-même."],
-  ["Comment présenter WALS à un commerçant ?", "Préparez sa démonstration avant la visite, ouvrez-la devant lui, faites-lui scanner l'expérience puis montrez concrètement ce que ses propres clients verront. L'objectif est de vendre sur une démonstration réelle plutôt que sur une promesse abstraite."],
-  ["Puis-je préparer une démo avant d'entrer chez un prospect ?", "Oui. C'est un principe central de WALS : arriver avec une expérience déjà préparée aux couleurs du commerce pour rendre la présentation immédiate et visuelle."],
-  ["Le commerçant doit-il installer du matériel ?", "L'expérience est pensée autour du QR code, du navigateur mobile et du Wallet. Le but est de réduire au maximum la friction et le matériel nécessaire dans le commerce."],
-  ["Puis-je gérer plusieurs commerces ?", "Oui. WALS Cockpit est conçu pour suivre vos prospects, vos visites, vos démonstrations, vos commerces actifs et les prochaines actions depuis un seul espace."],
-  ["Puis-je intégrer WALS dans ma propre offre ?", "Oui. Votre offre commerciale reste la vôtre : vous choisissez les solutions proposées, votre niveau d'accompagnement et votre tarif. WALS devient l'infrastructure qui vous permet de vendre et de gérer ces services."],
-  ["Comment être informé de l'ouverture ?", "Inscrivez simplement votre adresse email en bas de cette page. Vous recevrez uniquement les informations liées à l'ouverture des accès partenaires WALS."],
+  ["Est-ce que je travaille pour WALS ?", "Non. L'objectif est de construire votre propre activité. Vous développez votre marque, vos offres et votre portefeuille de commerçants. WALS fournit la technologie qui vous permet d'opérer ces services."],
+  ["Puis-je utiliser ma propre marque ?", "Oui. Le modèle est pensé pour que votre identité commerciale reste au premier plan : votre nom, votre logo, vos couleurs et votre relation avec les commerces."],
+  ["Qui choisit le prix facturé au commerçant ?", "Vous. Vous construisez votre offre et choisissez le tarif que vous souhaitez facturer à vos propres clients. Les montants affichés sur cette page sont uniquement des exemples de simulation."],
+  ["Qui facture le commerçant ?", "Votre relation commerciale reste la vôtre. Le positionnement prévu est que vous trouviez vos commerçants et leur facturiez directement vos services, tandis que WALS fournit l'infrastructure technique."],
+  ["Dois-je savoir développer un logiciel ?", "Non. L'intérêt de WALS est précisément de vous éviter de développer la technologie, le Wallet, l'infrastructure et les outils de gestion vous-même."],
+  ["Que puis-je vendre aux commerces ?", "Des solutions de fidélité digitale, des expériences Play, des campagnes, du parrainage, des outils d'engagement et de suivi client. Chaque module est présenté comme un bénéfice commercial simple à expliquer au commerçant."],
+  ["Puis-je commencer avec un seul commerce ?", "Oui. Le parcours est pensé pour démarrer progressivement : préparez une démonstration, trouvez un premier commerce, définissez votre offre, activez le client puis reproduisez le processus."],
+  ["Puis-je gérer plusieurs clients depuis un seul endroit ?", "Oui. Le Cockpit centralise prospects, démonstrations, clients actifs, prochaines actions et indicateurs de votre portefeuille."],
+  ["Comment être informé du lancement ?", "Inscrivez simplement votre email en bas de la page. Vous recevrez les informations liées à l'ouverture des accès partenaires WALS."],
 ] as const;

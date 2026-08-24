@@ -39,7 +39,7 @@ export function WaitlistForm() {
       <div className="waitlist-row">
         <input id="waitlist-email" name="email" type="email" autoComplete="email" inputMode="email" placeholder="vous@exemple.fr" required aria-describedby="waitlist-privacy waitlist-status" />
         <input className="waitlist-honeypot" name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-        <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Inscription…" : "M'avertir à l'ouverture"}<span aria-hidden="true">→</span></button>
+        <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Inscription…" : "Être informé du lancement"}<span aria-hidden="true">→</span></button>
       </div>
       <p id="waitlist-privacy" className="waitlist-privacy">En vous inscrivant, vous demandez à recevoir par email les informations liées à l'ouverture de WALS. Désinscription à tout moment. <a href="/confidentialite">Confidentialité</a>.</p>
       <p id="waitlist-status" className={`waitlist-status ${state}`} aria-live="polite">{message}</p>

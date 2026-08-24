@@ -57,16 +57,14 @@ export function HeaderClient() {
   return (
     <header ref={headerRef} className="site-header" data-site-header>
       <div className="header-inner">
-        <a className="header-brand" href="#top" aria-label="Revenir en haut de WALS" onClick={() => closeMenu(false)}>
-          <BrandMark />
-        </a>
+        <a className="header-brand" href="#top" aria-label="Revenir en haut de WALS" onClick={() => closeMenu(false)}><BrandMark /></a>
         <nav className="desktop-nav" aria-label="Navigation principale">
-          <a href="#business">Votre business</a>
-          <a href="#solutions">Solutions</a>
-          <a href="#terrain">Vente terrain</a>
-          <a href="#cockpit">Cockpit</a>
+          <a href="#business">Votre activité</a>
+          <a href="#solutions">Ce que vous vendez</a>
+          <a href="#how">Comment ça marche</a>
+          <a href="#cockpit">Votre Cockpit</a>
         </nav>
-        <a className="header-status" href="#ouverture"><span className="status-dot" /> Accès partenaires bientôt</a>
+        <a className="header-status" href="#ouverture"><span className="status-dot" /> Être informé du lancement</a>
         <button
           ref={buttonRef}
           className={`menu-toggle ${open ? "is-open" : ""}`}
@@ -80,11 +78,11 @@ export function HeaderClient() {
         </button>
       </div>
       <nav id="mobile-navigation" className={`mobile-nav ${open ? "is-open" : ""}`} aria-label="Navigation mobile" aria-hidden={!open}>
-        <a href="#business" onClick={() => closeMenu(false)}>Votre business</a>
-        <a href="#solutions" onClick={() => closeMenu(false)}>Solutions</a>
-        <a href="#terrain" onClick={() => closeMenu(false)}>Vente terrain</a>
-        <a href="#cockpit" onClick={() => closeMenu(false)}>Cockpit</a>
-        <a className="mobile-open-link" href="#ouverture" onClick={() => closeMenu(false)}>Être informé de l'ouverture</a>
+        <a href="#business" onClick={() => closeMenu(false)}>Votre activité</a>
+        <a href="#solutions" onClick={() => closeMenu(false)}>Ce que vous vendez</a>
+        <a href="#how" onClick={() => closeMenu(false)}>Comment ça marche</a>
+        <a href="#cockpit" onClick={() => closeMenu(false)}>Votre Cockpit</a>
+        <a className="mobile-open-link" href="#ouverture" onClick={() => closeMenu(false)}>Être informé du lancement</a>
       </nav>
     </header>
   );

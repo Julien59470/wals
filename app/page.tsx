@@ -7,7 +7,7 @@ const structuredData = {
   "@type": "WebSite",
   name: "WALS",
   url: siteUrl,
-  description: "Plateforme pour revendeurs de solutions digitales aux commerces : fidélité digitale, roue interactive, démonstrations personnalisées et cockpit commercial.",
+  description: "WALS fournit la technologie permettant de créer sa propre activité de fidélité digitale en marque blanche : offres, Wallet, engagement client et cockpit de gestion.",
   inLanguage: "fr-FR",
 };
 
