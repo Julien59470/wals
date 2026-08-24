@@ -8,7 +8,8 @@ export function MotionExperience() {
     const finePointer = window.matchMedia("(pointer: fine)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const header = document.querySelector<HTMLElement>("[data-site-header]");
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-motion-section], [data-reveal]"));
+    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const motionSections = Array.from(document.querySelectorAll<HTMLElement>("[data-motion-section]"));
 
     let pointerFrame = 0;
     let pendingX = window.innerWidth / 2;
@@ -21,8 +22,8 @@ export function MotionExperience() {
       const ny = pendingY / Math.max(window.innerHeight, 1) - 0.5;
       root.style.setProperty("--pointer-x", `${pendingX}px`);
       root.style.setProperty("--pointer-y", `${pendingY}px`);
-      root.style.setProperty("--parallax-x", `${nx * 12}px`);
-      root.style.setProperty("--parallax-y", `${ny * 9}px`);
+      root.style.setProperty("--parallax-x", `${nx * 8}px`);
+      root.style.setProperty("--parallax-y", `${ny * 6}px`);
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -47,21 +48,27 @@ export function MotionExperience() {
       if (!scrollFrame) scrollFrame = window.requestAnimationFrame(renderScroll);
     };
 
-    const observer = new IntersectionObserver(
+    const revealObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          const node = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            node.classList.add("is-visible", "is-motion-active");
-          } else {
-            node.classList.remove("is-motion-active");
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
           }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" },
     );
 
-    sections.forEach((node) => observer.observe(node));
+    const motionObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) entry.target.classList.toggle("is-motion-active", entry.isIntersecting);
+      },
+      { threshold: 0.05, rootMargin: "12% 0px 12% 0px" },
+    );
+
+    revealNodes.forEach((node) => revealObserver.observe(node));
+    motionSections.forEach((node) => motionObserver.observe(node));
     document.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerleave", onPointerLeave);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -70,7 +77,8 @@ export function MotionExperience() {
     return () => {
       if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
       if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
-      observer.disconnect();
+      revealObserver.disconnect();
+      motionObserver.disconnect();
       document.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerleave", onPointerLeave);
       window.removeEventListener("scroll", onScroll);

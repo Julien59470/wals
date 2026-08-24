@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+import { isCanonicalProduction, siteUrl } from "@/lib/site";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: "https://wals.fr", lastModified: new Date(), changeFrequency: "weekly", priority: 1 }];
+  if (!isCanonicalProduction) return [];
+  return [{ url: siteUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 }];
 }

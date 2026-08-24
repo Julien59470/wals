@@ -1,11 +1,12 @@
 import { LandingExperience } from "@/components/landing/LandingExperience";
 import { MotionExperience } from "@/components/landing/MotionExperience";
+import { siteUrl } from "@/lib/site";
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "WALS",
-  url: "https://wals.fr",
+  url: siteUrl,
   description: "Plateforme pour revendeurs de solutions digitales aux commerces : fidélité digitale, roue interactive, démonstrations personnalisées et cockpit commercial.",
   inLanguage: "fr-FR",
 };

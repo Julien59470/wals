@@ -1,5 +1,14 @@
 import type { MetadataRoute } from "next";
 
+import { isCanonicalProduction, siteUrl } from "@/lib/site";
+
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", allow: "/" }, sitemap: "https://wals.fr/sitemap.xml", host: "https://wals.fr" };
+  if (!isCanonicalProduction) {
+    return { rules: [{ userAgent: "*", disallow: "/" }] };
+  }
+
+  return {
+    rules: [{ userAgent: "*", allow: "/" }],
+    sitemap: `${siteUrl}/sitemap.xml`,
+  };
 }

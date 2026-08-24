@@ -51,6 +51,33 @@ export type Database = {
         };
         Relationships: [];
       };
+      partner_waitlist: {
+        Row: {
+          consent_launch: boolean;
+          created_at: string;
+          email: string;
+          id: string;
+          source: string;
+          unsubscribed_at: string | null;
+        };
+        Insert: {
+          consent_launch?: boolean;
+          created_at?: string;
+          email: string;
+          id?: string;
+          source?: string;
+          unsubscribed_at?: string | null;
+        };
+        Update: {
+          consent_launch?: boolean;
+          created_at?: string;
+          email?: string;
+          id?: string;
+          source?: string;
+          unsubscribed_at?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

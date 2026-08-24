@@ -1,6 +1,6 @@
-export function BrandMark({ compact = false }: { compact?: boolean }) {
+export function BrandMark() {
   return (
-    <span className={`brand-mark${compact ? " brand-mark-compact" : ""}`} aria-label="WALS">
+    <span className="brand-mark" aria-label="WALS">
       <img
         className="brand-logo"
         src="/wals-logo.png"
