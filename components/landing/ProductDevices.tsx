@@ -12,7 +12,7 @@ export function Iphone({ compact = false }: { compact?: boolean }) {
           </div>
           <div className="stamp-grid">{Array.from({ length: 10 }).map((_, index) => <span key={index} className={`stamp ${index < 6 ? "stamp-on" : index === 6 ? "stamp-next" : ""}`}>{index < 7 ? "W" : ""}</span>)}</div>
           <div className="pass-note"><strong className="pass-note-before">Encore 4 passages</strong><strong className="pass-note-after">Encore 3 passages</strong><span>avant votre récompense</span></div>
-          <div className="wallet-code"><i /><i /><i /><i /><i /></div>
+          <div className="wallet-qr" aria-label="QR code vers wals.fr"><img src="/wals-qr.svg" alt="" width={78} height={78} draggable={false} /></div>
         </div>
         <div className="wallet-notification"><span>W</span><div><strong>Le Fournil</strong><small>Nouveau tampon ajouté. Plus que 3 passages.</small></div></div>
         <div className="iphone-home" />
