@@ -1,23 +1,29 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "WALS — La plateforme des démarcheurs qui font grandir les commerces",
+  title: "WALS — La plateforme terrain en cours de développement",
   description:
-    "Créez, personnalisez et gérez des solutions digitales pour vos commerces : fidélité Wallet, roue digitale, démonstrations et pilotage multi-clients.",
+    "WALS construit une plateforme pour préparer, présenter et piloter des solutions digitales auprès des commerces. Fidélité, roue digitale et cockpit multi-commerces.",
   metadataBase: new URL("https://wals.fr"),
   openGraph: {
-    title: "WALS — Développez votre activité auprès des commerces",
+    title: "WALS — La plateforme terrain des démarcheurs",
     description:
-      "Une seule plateforme pour présenter, déployer et gérer vos solutions digitales chez les commerçants.",
+      "Fidélité digitale, roue digitale et cockpit multi-commerces. WALS est actuellement en cours de développement.",
     type: "website",
     locale: "fr_FR",
   },
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={manrope.variable}>
+    <html lang="fr" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>{children}</body>
     </html>
   );
