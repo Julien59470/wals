@@ -18,3 +18,5 @@ npm run dev
 ```
 
 Variables d'environnement disponibles dans `.env.example`.
+
+<!-- build verification -->
