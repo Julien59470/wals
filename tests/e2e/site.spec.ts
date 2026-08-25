@@ -1,24 +1,29 @@
 import { expect, test } from "@playwright/test";
 
-test("la racine oriente vers les deux audiences", async ({ page }) => {
+test("la racine oriente vers les deux audiences avec la DA historique", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Deux parcours");
-  await expect(page.getByRole("link", { name: /WALS pour mon commerce/i })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Comment voulez-vous/i);
+  await expect(page.getByRole("link", { name: /parcours commerce/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /parcours partenaire/i })).toBeVisible();
+  await expect(page.locator(".device.iphone")).toBeVisible();
+  await expect(page.locator(".device.samsung")).toBeVisible();
 });
 
-test("le parcours commerçant possède son propre message et formulaire", async ({ page }) => {
+test("le parcours commerçant conserve smartphones et message dédié", async ({ page }) => {
   await page.goto("/commercants");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(/Faites revenir vos clients/i);
   await expect(page.getByRole("button", { name: /Demander une présentation/i })).toBeVisible();
-  await expect(page.getByText(/APERÇU PRODUIT|EN PRÉPARATION/i).first()).toBeVisible();
+  await expect(page.locator(".device.iphone").first()).toBeVisible();
+  await expect(page.locator(".device.samsung").first()).toBeVisible();
+  await expect(page.getByText(/Aperçu produit|En préparation/i).first()).toBeVisible();
 });
 
-test("le parcours partenaire ne publie aucun prix fixe", async ({ page }) => {
+test("le parcours partenaire conserve la DA revendeur sans prix fixe", async ({ page }) => {
   await page.goto("/partenaires");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Construisez votre offre/i);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Lancez votre propre business/i);
   await expect(page.locator("body")).not.toContainText(/(?:29|39|49|59|69|99|159)\s*€/);
-  await expect(page.getByText(/Aucune promesse de revenu/i)).toBeVisible();
+  await expect(page.getByText(/Vous choisissez votre prix de vente/i)).toBeVisible();
+  await expect(page.locator(".dashboard-showcase")).toBeVisible();
 });
 
 test("une page sectorielle apporte un contenu spécifique", async ({ page }) => {

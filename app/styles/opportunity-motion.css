@@ -1,0 +1,36 @@
+/* Animations narratives de la page Revendeur. */
+.bo-fidelya-shell,.bo-wallet-demo-card,.bo-market-marquee > div { animation-play-state: paused; }
+.is-motion-active .bo-fidelya-shell,.is-motion-active .bo-wallet-demo-card,.is-motion-active .bo-market-marquee > div { animation-play-state: running; }
+
+.is-motion-active .bo-brand-origin i { animation: bo-origin-arrow 1.5s ease-in-out infinite; }
+@keyframes bo-origin-arrow { 0%,100% { transform: translateX(0); opacity: .55; } 50% { transform: translateX(4px); opacity: 1; } }
+
+.is-motion-active .bo-flow-node { animation: bo-flow-focus 6s ease-in-out infinite; }
+.is-motion-active .bo-flow-node:nth-of-type(2) { animation-delay: .65s; }
+.is-motion-active .bo-flow-node:nth-of-type(3) { animation-delay: 1.3s; }
+.is-motion-active .bo-flow-node:nth-of-type(4) { animation-delay: 1.95s; }
+.is-motion-active .bo-flow-node:nth-of-type(5) { animation-delay: 2.6s; }
+@keyframes bo-flow-focus { 0%,100% { transform: translateX(0); } 9%,22% { transform: translateX(7px); } }
+
+.is-motion-active .bo-fidelya-mini-dashboard .is-revenue strong { animation: bo-revenue-glow 3.2s ease-in-out infinite; }
+@keyframes bo-revenue-glow { 0%,100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+
+.is-motion-active .bo-client-activated > b { animation: bo-active-pulse 2.2s ease-in-out infinite; }
+@keyframes bo-active-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(45,141,89,0); } 50% { box-shadow: 0 0 0 7px rgba(45,141,89,.11); } }
+
+.is-motion-active .bo-notification-preview { animation: bo-notification-demo 5.2s cubic-bezier(.18,.8,.2,1) infinite; }
+@keyframes bo-notification-demo { 0%,16%,100% { opacity: .42; transform: translateY(-8px); } 24%,82% { opacity: 1; transform: translateY(0); } }
+
+.is-motion-active .bo-floating-wallet { animation: bo-wallet-stream-a 7s ease-in-out infinite; }
+.is-motion-active .bo-floating-wallet.is-beauty { animation: bo-wallet-stream-b 7.6s ease-in-out infinite -.8s; }
+.is-motion-active .bo-floating-wallet.is-barber { animation: bo-wallet-stream-c 8.2s ease-in-out infinite -1.4s; }
+@keyframes bo-wallet-stream-a { 0%,100% { transform: rotate(-7deg) translateY(0); } 50% { transform: rotate(-5deg) translateY(-10px); } }
+@keyframes bo-wallet-stream-b { 0%,100% { transform: rotate(5deg) translateY(0); } 50% { transform: rotate(3deg) translateY(8px); } }
+@keyframes bo-wallet-stream-c { 0%,100% { transform: rotate(-2deg) translateY(0); } 50% { transform: rotate(0) translateY(-7px); } }
+
+.is-motion-active .bo-story-client .bo-client-activated { animation: bo-client-entry 6.8s ease-in-out infinite; }
+@keyframes bo-client-entry { 0%,15%,100% { transform: translateY(7px); box-shadow: 0 20px 45px rgba(10,42,74,.06); } 24%,78% { transform: translateY(0); box-shadow: 0 26px 58px rgba(10,42,74,.13); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bo-brand-origin i,.bo-flow-node,.bo-fidelya-mini-dashboard .is-revenue strong,.bo-client-activated > b,.bo-notification-preview,.bo-floating-wallet,.bo-story-client .bo-client-activated { animation: none !important; }
+}
