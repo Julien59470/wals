@@ -1,25 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Confidentialité — WALS",
-  description: "Informations relatives au traitement des données de la liste d'attente WALS.",
-};
+import { BrandMark } from "@/components/site/BrandMark";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { contactEmail } from "@/lib/site";
 
-export default function PrivacyPage() {
-  return (
-    <main className="legal-page">
-      <div className="legal-shell">
-        <a className="legal-back" href="/">← Retour à WALS</a>
-        <h1>Politique de confidentialité</h1>
-        <p className="legal-intro">Cette page concerne la liste d'attente permettant d'être averti lors de l'ouverture des accès partenaires WALS.</p>
+export const metadata: Metadata = { title: "Politique de confidentialité", description: "Traitement des données transmises sur le site WALS.", alternates: { canonical: "/confidentialite" } };
 
-        <section className="legal-section"><h2>Données collectées</h2><p>WALS collecte uniquement l'adresse email renseignée dans le formulaire d'inscription, ainsi que la date d'inscription et la source technique de la demande.</p></section>
-        <section className="legal-section"><h2>Finalité et base légale</h2><p>L'adresse email est utilisée uniquement pour envoyer les informations liées à l'ouverture de WALS et aux accès partenaires. Le traitement repose sur votre consentement, exprimé lorsque vous demandez à être averti.</p></section>
-        <section className="legal-section"><h2>Durée de conservation</h2><p>Les données sont conservées jusqu'à votre désinscription et, au plus tard, pendant trois ans après le dernier contact ou l'ouverture de WALS lorsqu'aucune relation n'est ensuite engagée.</p></section>
-        <section className="legal-section"><h2>Destinataires</h2><p>Les données sont accessibles uniquement à WALS et aux sous-traitants techniques strictement nécessaires au fonctionnement de la plateforme et de son hébergement, notamment Supabase et Vercel.</p></section>
-        <section className="legal-section"><h2>Vos droits</h2><p>Vous pouvez demander l'accès, la rectification ou la suppression de vos données, ainsi que retirer votre consentement à tout moment. Vous pouvez également introduire une réclamation auprès de la CNIL.</p></section>
-        <section className="legal-section"><h2>Contact relatif aux données</h2><p>Pour exercer vos droits ou poser une question relative à vos données : <a href="mailto:contact@wals.fr">contact@wals.fr</a>.</p></section>
-      </div>
-    </main>
-  );
+export default function PrivacyPage(){
+  return <><main className="legal-shell"><BrandMark/><span className="eyebrow dark">DONNÉES PERSONNELLES</span><h1>Politique de confidentialité</h1><p className="legal-intro">Cette politique décrit les traitements mis en place par la vitrine WALS pour les demandes commerçants, les demandes partenaires et l'inscription facultative aux informations de lancement.</p>
+    <section className="legal-section"><h2>Données collectées</h2><p>Selon le parcours, WALS peut recevoir votre nom, votre adresse email professionnelle, le nom de votre commerce ou votre activité, un numéro de téléphone facultatif et le message que vous choisissez d'envoyer. Le serveur traite également des informations techniques nécessaires à la sécurité de la requête. Le dispositif anti-abus enregistre une empreinte hachée temporaire plutôt qu'une adresse IP brute dans la base applicative.</p></section>
+    <section className="legal-section"><h2>Finalités</h2><ul><li>répondre à une demande liée à un commerce ;</li><li>qualifier une demande liée au futur programme partenaire ;</li><li>protéger les formulaires contre les abus ;</li><li>envoyer les informations de lancement uniquement lorsque la case facultative correspondante a été cochée.</li></ul><p>Les demandes commerçants et partenaires sont enregistrées avec une audience distincte. Le fait d'envoyer une demande ne vous inscrit pas automatiquement à des communications de lancement.</p></section>
+    <section className="legal-section"><h2>Bases juridiques</h2><p>Le traitement d'une demande repose, selon sa nature, sur les mesures précontractuelles demandées par la personne ou sur l'intérêt légitime de WALS à répondre à une sollicitation professionnelle. Les informations de lancement reposent sur un consentement séparé et facultatif, qui peut être retiré à tout moment.</p></section>
+    <section className="legal-section"><h2>Destinataires et sous-traitants</h2><p>Les données sont accessibles aux personnes WALS qui en ont besoin pour traiter la demande et aux prestataires techniques nécessaires au fonctionnement du service. Le projet utilise notamment Supabase pour la base de données et prévoit un déploiement applicatif sur Vercel. La liste doit être mise à jour si l'infrastructure de production change.</p></section>
+    <section className="legal-section"><h2>Durée de conservation</h2><p>Les données de prospection et de prise de contact sont destinées à être conservées pendant la durée nécessaire au suivi de la demande puis, en l'absence de relation contractuelle, au maximum trois ans à compter du dernier contact pertinent. Une adresse inscrite aux informations de lancement reste active jusqu'au retrait du consentement ou jusqu'à la fin de la finalité concernée. Les compteurs anti-abus sont temporaires.</p></section>
+    <section className="legal-section"><h2>Vos droits</h2><p>Vous pouvez demander l'accès, la rectification, l'effacement ou la limitation des données vous concernant, vous opposer à certains traitements et retirer un consentement lorsqu'il constitue la base du traitement. Vous pouvez également introduire une réclamation auprès de la CNIL.</p></section>
+    <section className="legal-section"><h2>Désinscription</h2><p>Une page dédiée permet de retirer l'adresse des informations de lancement : <Link href="/desinscription">wals.fr/desinscription</Link>. La réponse du formulaire ne révèle pas si une adresse était auparavant enregistrée.</p></section>
+    <section className="legal-section"><h2>Contact</h2><p>Pour toute demande relative à vos données : <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p></section>
+  </main><SiteFooter/></>;
 }

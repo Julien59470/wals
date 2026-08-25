@@ -1,24 +1,16 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "WALS — Lancez votre business de fidélité digitale";
+export const alt = "WALS — Fidélité digitale pour commerces et partenaires";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function Image() {
   return new ImageResponse(
-    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "70px", background: "radial-gradient(circle at 82% 20%,#16476f,#082743 38%,#061326 76%)", color: "white", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "18px", fontSize: 35, fontWeight: 800 }}>
-        <span style={{ display: "flex", position: "relative", width: 58, height: 58, alignItems: "center", justifyContent: "center", borderRadius: 15, background: "#ff6d1b", fontSize: 32 }}>W<span style={{ position: "absolute", right: -8, top: -11, fontSize: 28 }}>↗</span></span>
-        WALS
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: 1000 }}>
-        <div style={{ display: "flex", color: "#ff9c64", fontSize: 18, fontWeight: 800, letterSpacing: "3px" }}>MARQUE BLANCHE · VOS PRIX · VOS CLIENTS</div>
-        <div style={{ fontSize: 72, lineHeight: .94, letterSpacing: "-4px", fontWeight: 800 }}>Lancez votre propre business de fidélité digitale.</div>
-        <div style={{ fontSize: 25, color: "#bdc8d2" }}>Votre marque. Vos prix. Vos clients. Notre technologie.</div>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between", color: "#8fa0b0", fontSize: 18 }}><span>WALS fournit les outils.</span><span>Le business vous appartient.</span></div>
-    </div>,
-    size,
+    <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 70, background: "radial-gradient(circle at 82% 16%,#17466f,#0b2948 35%,#061326 78%)", color: "white", fontFamily: "Arial, sans-serif" }}>
+      <div style={{ display: "flex", gap: 14, alignItems: "center", fontSize: 34, fontWeight: 800 }}><span style={{ color: "#ff6d1b" }}>↗</span> WALS</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 18, maxWidth: 1020 }}><span style={{ color: "#ff9f69", fontSize: 19, letterSpacing: 3, fontWeight: 800 }}>FIDÉLITÉ DIGITALE</span><strong style={{ fontSize: 74, lineHeight: .94, letterSpacing: -4 }}>Une technologie. Deux parcours.</strong><span style={{ color: "#bfccd8", fontSize: 26 }}>Pour les commerces · Pour les partenaires</span></div>
+      <div style={{ color: "#8192a3", fontSize: 18 }}>wals.fr</div>
+    </div>, size,
   );
 }

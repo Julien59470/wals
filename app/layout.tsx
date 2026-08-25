@@ -1,47 +1,47 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { isCanonicalProduction, siteUrl } from "@/lib/site";
-
 import "./globals.css";
-import "./motion.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space", display: "swap" });
+import { canonicalDomain, isIndexableProduction, siteName, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "WALS — Lancez votre business de fidélité digitale en marque blanche",
-  description: "Créez votre marque, construisez vos offres, choisissez vos prix et développez votre portefeuille de commerces. WALS fournit la technologie de fidélité digitale et les outils pour piloter votre activité.",
+  title: { default: "WALS — Fidélité digitale pour commerces et partenaires", template: "%s | WALS" },
+  description: "WALS prépare une plateforme de fidélité digitale pour les commerces et un parcours en marque blanche pour les partenaires.",
+  applicationName: siteName,
   alternates: { canonical: "/" },
+  robots: isIndexableProduction ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: {
-    title: "WALS — Votre marque. Vos prix. Vos clients. Notre technologie.",
-    description: "Lancez votre propre activité de fidélité digitale : marque blanche, offres personnalisées, revenus mensuels récurrents et Cockpit pour gérer vos commerces.",
-    url: siteUrl,
-    siteName: "WALS",
     type: "website",
     locale: "fr_FR",
+    siteName,
+    url: canonicalDomain,
+    title: "WALS — Deux parcours, une technologie de fidélité digitale",
+    description: "Fidélisez votre commerce ou construisez votre propre offre de fidélité digitale avec WALS.",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "WALS — Lancez votre business de fidélité digitale",
-    description: "WALS fournit les outils. Le business vous appartient.",
-  },
-  robots: {
-    index: isCanonicalProduction,
-    follow: isCanonicalProduction,
-    googleBot: { index: isCanonicalProduction, follow: isCanonicalProduction },
-  },
+  twitter: { card: "summary_large_image", title: "WALS — Fidélité digitale", description: "Deux parcours : commerces et partenaires." },
+  icons: { icon: "/wals-logo.png", apple: "/wals-logo.png" },
 };
 
-export const viewport: Viewport = { themeColor: "#07192f", colorScheme: "light dark" };
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "@id": `${canonicalDomain}/#website`, url: canonicalDomain, name: siteName, inLanguage: "fr-FR" },
+    { "@type": "Organization", "@id": `${canonicalDomain}/#organization`, name: siteName, url: canonicalDomain, logo: `${canonicalDomain}/wals-logo.png`, email: "contact@wals.fr" },
+  ],
+};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body>{children}<Analytics /><SpeedInsights /></body>
+    <html lang="fr">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      </body>
     </html>
   );
 }

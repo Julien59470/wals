@@ -1,14 +1,7 @@
 import type { MetadataRoute } from "next";
-
-import { isCanonicalProduction, siteUrl } from "@/lib/site";
+import { canonicalDomain, isIndexableProduction } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  if (!isCanonicalProduction) {
-    return { rules: [{ userAgent: "*", disallow: "/" }] };
-  }
-
-  return {
-    rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${siteUrl}/sitemap.xml`,
-  };
+  if (!isIndexableProduction) return { rules: [{ userAgent: "*", disallow: "/" }] };
+  return { rules: [{ userAgent: "*", allow: "/", disallow: ["/api/"] }], sitemap: `${canonicalDomain}/sitemap.xml`, host: canonicalDomain };
 }

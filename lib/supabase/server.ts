@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-import type { Database } from "@/types/database";
 import { getSupabaseConfig } from "@/lib/supabase/config";
+import type { Database } from "@/types/database";
 
 export function createPublicServerClient() {
   const { url, publishableKey } = getSupabaseConfig();

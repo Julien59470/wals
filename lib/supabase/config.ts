@@ -1,10 +1,10 @@
-const fallbackUrl = "https://kcamudmbokjlnvrslniu.supabase.co";
-const fallbackPublishableKey = "sb_publishable_GQq53h-EIzTYTcIvV_zAzg_EoTmykNZ";
-
 export function getSupabaseConfig() {
-  return {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? fallbackUrl,
-    publishableKey:
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? fallbackPublishableKey,
-  };
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
+
+  if (!url || !publishableKey) {
+    throw new Error("Configuration Supabase manquante.");
+  }
+
+  return { url, publishableKey };
 }
