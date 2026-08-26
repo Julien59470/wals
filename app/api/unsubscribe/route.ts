@@ -7,17 +7,17 @@ import { normalizeEmail } from "@/lib/validation";
 export const dynamic = "force-dynamic";
 
 const noStoreHeaders = { "cache-control": "no-store, max-age=0" };
-const successMessage = "Si cette adresse était inscrite, elle a été retirée des informations de lancement WALS.";
+const successMessage = "Si cette adresse était inscrite, elle ne recevra plus les informations de lancement WALS.";
 
 export async function POST(request: Request) {
   if (!isAllowedBrowserRequest(request)) {
-    return NextResponse.json({ message: "Origine de requête refusée." }, { status: 403, headers: noStoreHeaders });
+    return NextResponse.json({ message: "Cette requête ne peut pas être traitée." }, { status: 403, headers: noStoreHeaders });
   }
 
   const parsed = await readPublicFormJson(request);
   if (!parsed.data) {
     const status = parsed.error === "too_large" ? 413 : 400;
-    return NextResponse.json({ message: parsed.error === "too_large" ? "Requête trop volumineuse." : "Requête invalide." }, { status, headers: noStoreHeaders });
+    return NextResponse.json({ message: parsed.error === "too_large" ? "La requête est trop volumineuse." : "La requête est invalide." }, { status, headers: noStoreHeaders });
   }
   const body = parsed.data;
 
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    if (error.message.includes("rate_limited")) return NextResponse.json({ message: "Trop de tentatives. Réessayez dans quelques minutes." }, { status: 429, headers: noStoreHeaders });
+    if (error.message.includes("rate_limited")) return NextResponse.json({ message: "Trop de tentatives ont été effectuées. Réessayez dans quelques minutes." }, { status: 429, headers: noStoreHeaders });
     console.error("launch_unsubscribe_failed", { code: error.code });
     return NextResponse.json({ message: "La désinscription n'a pas pu être traitée pour le moment." }, { status: 500, headers: noStoreHeaders });
   }

@@ -5,7 +5,7 @@ import { LegalPageShell } from "@/components/site/LegalPageShell";
 
 export const metadata: Metadata = {
   title: "Cookies et mesure d'audience",
-  description: "Informations sur les traceurs, Web Analytics et Speed Insights utilisés sur WALS.",
+  description: "Informations sur les outils de mesure d'audience et de performance utilisés par WALS.",
   alternates: { canonical: "/cookies" },
 };
 
@@ -14,33 +14,33 @@ export default function CookiesPage() {
     <LegalPageShell
       eyebrow="TRACEURS & MESURE"
       title="Cookies et mesure d'audience"
-      intro={<p>Le site WALS limite volontairement les outils de suivi pendant sa phase de développement. Cette page décrit les mécanismes présents dans le code actuel.</p>}
+      intro={<p>WALS limite volontairement les outils de suivi et n'utilise actuellement aucun dispositif publicitaire ou de personnalisation comportementale.</p>}
     >
       <section className="legal-section">
-        <h2>Pas de publicité ciblée ni de réseau social embarqué</h2>
-        <p>Le site n'intègre actuellement ni régie publicitaire, ni pixel publicitaire, ni bouton social chargé depuis une plateforme tierce. Aucun outil de personnalisation publicitaire n'est configuré dans l'application.</p>
+        <h2>Aucune publicité ciblée</h2>
+        <p>Le site n'intègre actuellement ni régie publicitaire, ni pixel publicitaire, ni contenu social tiers destiné au suivi des visiteurs.</p>
       </section>
 
       <section className="legal-section">
         <h2>Vercel Web Analytics</h2>
-        <p>Web Analytics mesure notamment les pages vues, les référents, le type d'appareil, le navigateur et des informations géographiques agrégées. Vercel indique que cette solution n'utilise pas de cookies pour identifier les visiteurs, génère un identifiant haché temporaire et ne permet pas de suivre une personne entre différents sites.</p>
+        <p>Web Analytics permet à WALS de mesurer la fréquentation générale du site, notamment les pages consultées, les référents, les appareils et les navigateurs utilisés. Ce service fonctionne sans cookie publicitaire et fournit des données agrégées destinées à comprendre l'usage du site.</p>
       </section>
 
       <section className="legal-section">
         <h2>Vercel Speed Insights</h2>
-        <p>Speed Insights mesure les Core Web Vitals et d'autres informations techniques de performance. Vercel indique que les points de données sont anonymes et ne sont pas reliés à un visiteur ni à une adresse IP, et qu'ils ne permettent pas de reconstruire une session de navigation.</p>
+        <p>Speed Insights mesure les performances techniques du site et les Core Web Vitals afin d'améliorer la rapidité et la qualité d'affichage sur ordinateur, tablette et mobile.</p>
       </section>
 
       <section className="legal-section">
-        <h2>Pourquoi aucun bandeau de consentement n'est affiché actuellement ?</h2>
-        <p>Le code actuel n'intègre ni régie publicitaire, ni pixel publicitaire, ni widget social. Vercel indique que Web Analytics fonctionne sans cookies et avec des données agrégées anonymisées, et que Speed Insights n'associe pas ses mesures à un visiteur ou à une adresse IP. Sur cette base, aucun bandeau n'est injecté par l'application actuelle.</p>
-        <p>Cette décision doit rester liée à la configuration réellement déployée : l'exemption de consentement pour une mesure d'audience n'est valable que si les critères applicables sont effectivement respectés. Tout nouveau traceur ou usage sortant de ce cadre devra être bloqué avant consentement.</p>
+        <h2>Consentement</h2>
+        <p>Les outils actuellement utilisés ne servent ni à la publicité ciblée ni à la personnalisation commerciale. Aucun bandeau de consentement n'est donc affiché pour ces seuls usages.</p>
+        <p>Si WALS active ultérieurement un outil nécessitant votre consentement, celui-ci sera demandé avant le dépôt ou la lecture des traceurs concernés.</p>
       </section>
 
       <section className="legal-section">
-        <h2>Évolution de la configuration</h2>
-        <p>Cette page doit être mise à jour avant toute activation d'un nouvel outil de mesure, de publicité, de personnalisation ou de contenu tiers susceptible de déposer ou lire des informations sur le terminal.</p>
-        <p>Pour le traitement des données personnelles et vos droits, consultez la <Link href="/confidentialite">politique de confidentialité</Link>.</p>
+        <h2>Évolution des outils utilisés</h2>
+        <p>Cette page sera mise à jour en cas d'ajout ou de modification d'un outil de mesure, de publicité, de personnalisation ou de contenu tiers.</p>
+        <p>Pour en savoir plus sur le traitement de vos données personnelles et vos droits, consultez la <Link href="/confidentialite">politique de confidentialité</Link>.</p>
       </section>
     </LegalPageShell>
   );

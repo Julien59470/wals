@@ -30,7 +30,7 @@ export const sectors: SectorPage[] = [
     ],
     faq: [
       ["La carte remplace-t-elle obligatoirement le papier ?", "Non. Le commerce peut faire évoluer son fonctionnement progressivement."],
-      ["Peut-on utiliser des tampons ?", "C'est l'un des modèles de fidélité présentés dans le périmètre produit WALS en préparation."],
+      ["Peut-on utiliser des tampons ?", "Oui, le système de tampons fait partie des mécaniques de fidélité prévues par WALS."],
     ],
   },
   {
@@ -50,8 +50,8 @@ export const sectors: SectorPage[] = [
       { title: "Parrainage", description: "Le client fidèle peut recommander le salon dans un parcours prévu pour suivre la recommandation." },
     ],
     faq: [
-      ["WALS remplace-t-il un logiciel de réservation ?", "Non. Le positionnement présenté concerne la fidélité et l'engagement, pas le remplacement d'un agenda métier."],
-      ["Peut-on différencier plusieurs avantages ?", "L'objectif produit est de permettre des règles adaptées aux offres du salon."],
+      ["WALS remplace-t-il un logiciel de réservation ?", "Non. WALS se concentre sur la fidélité et l'engagement client, pas sur le remplacement d'un agenda métier."],
+      ["Peut-on différencier plusieurs avantages ?", "Oui, le programme est pensé pour proposer des règles adaptées aux offres du salon."],
     ],
   },
   {
@@ -71,8 +71,8 @@ export const sectors: SectorPage[] = [
       { title: "Client satisfait", description: "Le parcours de parrainage vise à transformer la satisfaction en recommandation mesurable." },
     ],
     faq: [
-      ["La solution dépend-elle d'un système de caisse particulier ?", "Les intégrations finales seront documentées séparément. Le site ne promet pas aujourd'hui une compatibilité universelle."],
-      ["Peut-on faire des offres limitées dans le temps ?", "C'est une capacité prévue dans les fonctions de campagne en préparation."],
+      ["La solution dépend-elle d'un système de caisse particulier ?", "Les intégrations de caisse compatibles seront précisées à l'ouverture. WALS n'annonce pas de compatibilité universelle."],
+      ["Peut-on faire des offres limitées dans le temps ?", "Cette possibilité fait partie des fonctions de campagne prévues par WALS."],
     ],
   },
   {
@@ -92,8 +92,8 @@ export const sectors: SectorPage[] = [
       { title: "Ambassadeurs", description: "Le parrainage est prévu pour structurer les recommandations des clientes et clients fidèles." },
     ],
     faq: [
-      ["WALS gère-t-il les rendez-vous ?", "Ce n'est pas l'objectif principal présenté : WALS se concentre sur fidélité, engagement et suivi client."],
-      ["Peut-on conserver une image haut de gamme ?", "Le produit vise une personnalisation de l'identité visuelle du commerce dans les limites techniques finales."],
+      ["WALS gère-t-il les rendez-vous ?", "Non. WALS se concentre sur la fidélité, l'engagement et le suivi client."],
+      ["Peut-on conserver une image haut de gamme ?", "Oui, l'expérience est pensée pour respecter l'identité visuelle du commerce selon les possibilités de personnalisation proposées."],
     ],
   },
   {
@@ -110,11 +110,11 @@ export const sectors: SectorPage[] = [
     scenarios: [
       { title: "Programme adapté", description: "Le commerce définit une mécanique cohérente avec sa réalité plutôt qu'une règle générique." },
       { title: "Carte dans le téléphone", description: "Le client garde sa fidélité accessible dans son Wallet au lieu de multiplier les cartes papier." },
-      { title: "Pilotage", description: "Les statistiques prévues doivent aider à comprendre l'usage et à ajuster les actions commerciales." },
+      { title: "Pilotage", description: "Les statistiques permettent de comprendre l'usage et d'ajuster les actions commerciales." },
     ],
     faq: [
       ["Quels commerces sont concernés ?", "Tout commerce pour lequel la récurrence, la recommandation ou la réactivation client ont une valeur réelle peut être pertinent."],
-      ["Le programme est-il identique pour tous ?", "Non. Le positionnement WALS repose précisément sur l'adaptation des règles et des avantages au commerce."],
+      ["Le programme est-il identique pour tous ?", "Non. WALS est pensé pour adapter les règles et les avantages à la réalité de chaque commerce."],
     ],
   },
 ];

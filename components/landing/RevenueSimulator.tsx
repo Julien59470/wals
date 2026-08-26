@@ -31,7 +31,7 @@ export function RevenueSimulator() {
         </div>
       </div>
       <div className="bo-revenue-result" aria-live="polite"><div><strong>{clients}</strong><span>COMMERCES</span></div><b>×</b><div><strong>{formatEuro(price)}</strong><span>/ MOIS</span></div><b>=</b><div className="bo-revenue-total"><strong>{formatEuro(monthly)}</strong><span>/ MOIS</span></div></div>
-      <div className="bo-revenue-foot"><strong>Vous restez libre de votre tarification.</strong><small>Les montants 29, 39, 49, 59 et 69 € servent uniquement d'exemples de simulation de chiffre d'affaires brut. Ils ne constituent ni un prix WALS, ni une recommandation, ni une promesse de revenu.</small></div>
+      <div className="bo-revenue-foot"><strong>Vous restez libre de votre tarification.</strong><small>Les montants proposés sont des exemples de tarifs de revente. Le résultat correspond à un chiffre d'affaires brut indicatif ; il ne représente pas le prix de WALS et ne constitue ni une recommandation tarifaire ni une garantie de revenu.</small></div>
     </div>
   );
 }

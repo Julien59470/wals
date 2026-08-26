@@ -7,7 +7,7 @@ export function CheckIcon() {
 }
 
 export function FidelyaLogo({ small = false }: { small?: boolean }) {
-  return <span className={`bo-fidelya-logo${small ? " is-small" : ""}`} aria-label="FIDELYA, marque fictive de démonstration"><i>F</i><span><strong>FIDELYA</strong><small>Solutions de fidélité digitale</small></span></span>;
+  return <span className={`bo-fidelya-logo${small ? " is-small" : ""}`} aria-label="FIDELYA, exemple de marque partenaire"><i>F</i><span><strong>FIDELYA</strong><small>Solutions de fidélité digitale</small></span></span>;
 }
 
 export function BenefitInterface({ type }: { type: "referral" | "campaign" | "stats" }) {

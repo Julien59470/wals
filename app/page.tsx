@@ -4,13 +4,13 @@ import { AudienceGateway } from "@/components/landing/AudienceGateway";
 import { canonicalDomain } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "WALS — Fidélité digitale en développement",
-  description: "WALS est en cours de développement. Découvrez le futur parcours commerçant et le futur parcours partenaire en marque blanche.",
+  title: "WALS — Fidélité digitale pour commerces et partenaires",
+  description: "Découvrez WALS, ses parcours dédiés aux commerçants et aux partenaires en marque blanche, puis soyez prévenu dès l'ouverture.",
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: canonicalDomain, title: "WALS — Deux parcours en préparation, une même technologie", description: "Découvrez le futur WALS pour les commerces et les futurs partenaires, puis soyez prévenu du lancement." },
+  openGraph: { type: "website", url: canonicalDomain, title: "WALS — Une technologie, deux parcours", description: "Fidélité digitale pour les commerces et programme en marque blanche pour les partenaires. Ouverture prochaine." },
 };
 
-const structuredData = { "@context": "https://schema.org", "@type": "WebSite", name: "WALS", url: canonicalDomain, description: "Plateforme de fidélité digitale en développement avec un parcours commerçant et un parcours partenaire en marque blanche.", inLanguage: "fr-FR" };
+const structuredData = { "@context": "https://schema.org", "@type": "WebSite", name: "WALS", url: canonicalDomain, description: "Plateforme de fidélité digitale avec un parcours commerçant et un parcours partenaire en marque blanche.", inLanguage: "fr-FR" };
 
 export default function HomePage() {
   return <><AudienceGateway/><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /></>;

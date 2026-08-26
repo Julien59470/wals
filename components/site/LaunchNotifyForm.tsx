@@ -23,7 +23,7 @@ export function LaunchNotifyForm({ audience }: { audience: "merchant" | "partner
       const body = (await response.json()) as { message?: string };
       if (!response.ok) throw new Error(body.message || "L'inscription n'a pas pu être enregistrée.");
       setState("success");
-      setMessage(body.message || "Votre email est enregistré.");
+      setMessage(body.message || "Votre inscription est enregistrée.");
       form.reset();
     } catch (error) {
       setState("error");
@@ -40,10 +40,10 @@ export function LaunchNotifyForm({ audience }: { audience: "merchant" | "partner
       <label className="sr-only" htmlFor={emailId}>Votre adresse email</label>
       <div className="launch-notify-row">
         <input id={emailId} name="email" type="email" inputMode="email" autoComplete="email" placeholder="votre@email.fr" aria-describedby={`${helpId} ${statusId}`} required />
-        <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Inscription…" : "Me prévenir au lancement"}</button>
+        <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Inscription…" : "Me prévenir de l'ouverture"}</button>
       </div>
       <input className="honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      <p className="launch-notify-privacy" id={helpId}>Votre email sert uniquement à vous prévenir de l'ouverture de ce parcours WALS. Il n'est pas utilisé pour des promotions générales ni cédé à des tiers à des fins commerciales. Retrait possible à tout moment via la <a href="/desinscription">désinscription</a>. <a href="/confidentialite">En savoir plus sur vos données</a>.</p>
+      <p className="launch-notify-privacy" id={helpId}>Votre adresse email sera utilisée uniquement pour vous informer de l'ouverture du parcours WALS sélectionné. Vous pourrez vous <a href="/desinscription">désinscrire à tout moment</a>. <a href="/confidentialite">En savoir plus sur vos données</a>.</p>
       <p className={`launch-notify-status ${state}`} id={statusId} role="status" aria-live="polite">{message}</p>
     </form>
   );

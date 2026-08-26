@@ -6,65 +6,71 @@ import { contactEmail } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
-  description: "Mentions légales et informations sur l'éditeur et l'hébergement du site WALS.",
+  description: "Informations légales relatives à l'éditeur et à l'hébergement du site WALS.",
   alternates: { canonical: "/mentions-legales" },
 };
 
-const optional = (value: string | null, fallback: string) => value || fallback;
+function LegalRow({ label, value }: { label: string; value: string | null }) {
+  if (!value) return null;
+  return <div><dt>{label}</dt><dd>{value}</dd></div>;
+}
 
 export default function LegalPage() {
   return (
     <LegalPageShell
       eyebrow="INFORMATIONS LÉGALES"
       title="Mentions légales"
-      intro={<p>Informations relatives à l'éditeur, au responsable de publication et à l'hébergement du site WALS.</p>}
+      intro={<p>Cette page présente les informations relatives à l'éditeur du site WALS, à la direction de la publication et à son hébergement.</p>}
     >
       {!legalIdentityReady ? (
         <div className="legal-alert" role="note">
-          <strong>Configuration juridique incomplète.</strong>
-          <p>Le site n'invente aucune identité légale. Tant que les coordonnées réelles de l'éditeur ne sont pas renseignées dans l'environnement de production, l'indexation publique est désactivée par le code.</p>
+          <strong>WALS est actuellement en pré-lancement.</strong>
+          <p>Les informations d'identification complètes de l'éditeur seront publiées avant l'ouverture commerciale du service.</p>
         </div>
       ) : null}
 
       <section className="legal-section">
         <h2>Éditeur du site</h2>
         <dl className="legal-data-list">
-          <div><dt>Nom / dénomination</dt><dd>{optional(legalIdentity.name, "À renseigner")}</dd></div>
-          <div><dt>Forme juridique</dt><dd>{optional(legalIdentity.legalForm, "À renseigner si applicable")}</dd></div>
-          <div><dt>Capital social</dt><dd>{optional(legalIdentity.capital, "À renseigner si applicable")}</dd></div>
-          <div><dt>Adresse</dt><dd>{optional(legalIdentity.address, "À renseigner")}</dd></div>
-          <div><dt>SIREN</dt><dd>{optional(legalIdentity.siren, "À renseigner")}</dd></div>
-          <div><dt>RCS</dt><dd>{optional(legalIdentity.rcs, "À renseigner si applicable")}</dd></div>
-          <div><dt>RNE</dt><dd>{optional(legalIdentity.rne, "À renseigner si applicable")}</dd></div>
-          <div><dt>TVA intracommunautaire</dt><dd>{optional(legalIdentity.vat, "À renseigner si applicable")}</dd></div>
+          <LegalRow label="Nom / dénomination" value={legalIdentity.name} />
+          <LegalRow label="Forme juridique" value={legalIdentity.legalForm} />
+          <LegalRow label="Capital social" value={legalIdentity.capital} />
+          <LegalRow label="Adresse" value={legalIdentity.address} />
+          <LegalRow label="SIREN" value={legalIdentity.siren} />
+          <LegalRow label="RCS" value={legalIdentity.rcs} />
+          <LegalRow label="RNE" value={legalIdentity.rne} />
+          <LegalRow label="TVA intracommunautaire" value={legalIdentity.vat} />
           <div><dt>Email</dt><dd><a href={`mailto:${contactEmail}`}>{contactEmail}</a></dd></div>
-          <div><dt>Téléphone</dt><dd>{optional(legalIdentity.contactPhone, "À renseigner")}</dd></div>
+          <LegalRow label="Téléphone" value={legalIdentity.contactPhone} />
         </dl>
       </section>
 
-      <section className="legal-section">
-        <h2>Direction de la publication</h2>
-        <p>{optional(legalIdentity.publicationDirector, "Nom du directeur ou de la directrice de la publication à renseigner")}</p>
-      </section>
+      {legalIdentity.publicationDirector ? (
+        <section className="legal-section">
+          <h2>Direction de la publication</h2>
+          <p>{legalIdentity.publicationDirector}</p>
+        </section>
+      ) : null}
 
-      <section className="legal-section">
-        <h2>Hébergement</h2>
-        <dl className="legal-data-list">
-          <div><dt>Hébergeur</dt><dd>{optional(legalIdentity.hostName, "À renseigner")}</dd></div>
-          <div><dt>Adresse</dt><dd>{optional(legalIdentity.hostAddress, "À renseigner")}</dd></div>
-          <div><dt>Téléphone</dt><dd>{optional(legalIdentity.hostPhone, "À renseigner")}</dd></div>
-        </dl>
-        <p className="legal-muted">Lorsque l'application est exécutée sur Vercel et qu'aucune valeur d'hébergement n'est surchargée, le site utilise les coordonnées publiques de Vercel Inc. configurées dans le code.</p>
-      </section>
+      {legalIdentity.hostName || legalIdentity.hostAddress || legalIdentity.hostPhone ? (
+        <section className="legal-section">
+          <h2>Hébergement</h2>
+          <dl className="legal-data-list">
+            <LegalRow label="Hébergeur" value={legalIdentity.hostName} />
+            <LegalRow label="Adresse" value={legalIdentity.hostAddress} />
+            <LegalRow label="Téléphone" value={legalIdentity.hostPhone} />
+          </dl>
+        </section>
+      ) : null}
 
       <section className="legal-section">
         <h2>Propriété intellectuelle</h2>
-        <p>Les textes, interfaces, illustrations réalisées pour WALS, éléments graphiques et signes distinctifs originaux sont protégés par les règles applicables de propriété intellectuelle. Les noms, marques, logos et services de tiers cités restent la propriété de leurs titulaires respectifs.</p>
+        <p>Les textes, interfaces, illustrations, éléments graphiques et signes distinctifs originaux de WALS sont protégés par les règles applicables en matière de propriété intellectuelle. Les noms, marques, logos et services de tiers cités restent la propriété de leurs titulaires respectifs.</p>
       </section>
 
       <section className="legal-section">
-        <h2>État du service</h2>
-        <p>WALS est en cours de développement. Le site ne permet actuellement ni achat, ni souscription payante, ni conclusion d'un contrat de service. Les interfaces, fonctionnalités annoncées comme « en préparation » et montants utilisés dans le simulateur partenaire sont des démonstrations non contractuelles.</p>
+        <h2>Disponibilité du service</h2>
+        <p>WALS est actuellement proposé en pré-lancement. Le site permet de découvrir les parcours commerce et partenaire et de s'inscrire pour être informé de leur ouverture. Aucun achat ni abonnement payant n'est proposé à ce stade.</p>
       </section>
     </LegalPageShell>
   );

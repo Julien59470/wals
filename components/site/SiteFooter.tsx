@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="site-container footer-grid">
         <div>
           <BrandMark compact />
-          <p>WALS est en cours de développement : un futur parcours pour les commerces et un futur parcours pour les partenaires.</p>
+          <p>WALS prépare deux parcours de fidélité digitale : un pour les commerces et un pour les partenaires et revendeurs.</p>
         </div>
         <nav aria-label="Parcours WALS">
           <strong>Parcours</strong>
@@ -28,7 +28,7 @@ export function SiteFooter() {
       </div>
       <div className="site-container footer-bottom">
         <span>© 2026 WALS</span>
-        <span>Plateforme en cours de développement · aucune souscription commerciale ouverte.</span>
+        <span>Ouverture prochaine · inscriptions à la liste de lancement disponibles.</span>
       </div>
     </footer>
   );

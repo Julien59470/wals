@@ -41,7 +41,7 @@ export function AudienceHeader({ audience }: { audience?: Audience }) {
   }, [open]);
 
   const contactHref = audience === "partner" ? "/partenaires#ouverture" : audience === "merchant" ? "/commercants#contact" : "#choix";
-  const contactLabel = audience ? "Être prévenu du lancement" : "Choisir mon parcours";
+  const contactLabel = audience ? "Être prévenu de l'ouverture" : "Choisir mon parcours";
 
   return (
     <header ref={headerRef} className="site-header" data-site-header>

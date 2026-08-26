@@ -7,13 +7,13 @@ test("la racine oriente vers les deux audiences avec la DA historique", async ({
   await expect(page.getByRole("link", { name: /parcours partenaire/i })).toBeVisible();
   await expect(page.locator(".device.iphone")).toBeVisible();
   await expect(page.locator(".device.samsung")).toBeVisible();
-  await expect(page.getByText(/Plateforme en cours de développement/i).first()).toBeVisible();
+  await expect(page.getByText(/Ouverture prochaine/i).first()).toBeVisible();
 });
 
 test("le parcours commerçant reste une liste de lancement simple", async ({ page }) => {
   await page.goto("/commercants");
-  await expect(page.getByText(/Plateforme en cours de développement/i).first()).toBeVisible();
-  await expect(page.getByRole("button", { name: /Me prévenir au lancement/i })).toBeVisible();
+  await expect(page.getByText(/Ouverture prochaine/i).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /Me prévenir de l'ouverture/i })).toBeVisible();
   await expect(page.locator('input[name="email"]')).toHaveCount(1);
   await expect(page.locator('input[name="fullName"]')).toHaveCount(0);
 });
@@ -21,7 +21,7 @@ test("le parcours commerçant reste une liste de lancement simple", async ({ pag
 test("le parcours partenaire conserve les scénarios 29 à 69 euros", async ({ page }) => {
   await page.goto("/partenaires");
   for (const price of [29, 39, 49, 59, 69]) await expect(page.getByRole("button", { name: `${price} €`, exact: true })).toBeVisible();
-  await expect(page.getByText(/ni un prix WALS/i)).toBeVisible();
+  await expect(page.getByText(/ne représente pas le prix de WALS/i)).toBeVisible();
 });
 
 test("les liens agences et indépendants ont disparu et les anciennes URL sont redirigées", async ({ page }) => {
@@ -41,7 +41,7 @@ test("les pages de conformité sont accessibles depuis le pied de page", async (
   await page.goto("/cookies");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(/Cookies et mesure d'audience/i);
   await page.goto("/accessibilite");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Démarche d'accessibilité/i);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Accessibilité/i);
 });
 
 test("la page de désinscription est explicite et ne demande qu'un email", async ({ page }) => {

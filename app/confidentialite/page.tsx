@@ -7,67 +7,66 @@ import { contactEmail } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
-  description: "Informations sur le traitement des données personnelles par le site WALS.",
+  description: "Informations sur le traitement des données personnelles par WALS.",
   alternates: { canonical: "/confidentialite" },
 };
 
 export default function PrivacyPage() {
-  const controller = legalIdentity.name || "l'éditeur du site WALS indiqué dans les mentions légales";
+  const controller = legalIdentity.name || "l'éditeur du site WALS";
 
   return (
     <LegalPageShell
       eyebrow="DONNÉES PERSONNELLES"
       title="Politique de confidentialité"
-      intro={<p>WALS est en développement. La seule donnée demandée par les formulaires publics de lancement est votre adresse email, afin de vous prévenir lorsque le parcours choisi ouvrira.</p>}
+      intro={<p>WALS veille à limiter la collecte de données au strict nécessaire. La liste de lancement demande uniquement votre adresse email afin de vous informer de l'ouverture du parcours choisi.</p>}
     >
       <section className="legal-section">
         <h2>Responsable du traitement</h2>
-        <p>Le responsable du traitement est {controller}. Ses informations d'identification sont publiées dans les <Link href="/mentions-legales">mentions légales</Link>. Pour toute question relative aux données personnelles : <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
+        <p>Le responsable du traitement est {controller}. Les informations d'identification disponibles figurent dans les <Link href="/mentions-legales">mentions légales</Link>. Pour toute question relative à vos données personnelles, vous pouvez écrire à <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
       </section>
 
       <section className="legal-section">
-        <h2>Données collectées et caractère obligatoire</h2>
-        <p>Pour rejoindre la liste de lancement, l'adresse email est obligatoire : sans elle, WALS ne peut pas envoyer l'information demandée. Le parcours concerné (« commerçant » ou « partenaire ») est transmis automatiquement par la page utilisée.</p>
-        <p>Pour sécuriser le formulaire, le serveur calcule temporairement une empreinte SHA-256 à partir d'informations techniques de la requête afin de limiter les abus. L'adresse IP brute n'est pas enregistrée dans la table applicative de limitation de fréquence.</p>
+        <h2>Données collectées</h2>
+        <p>L'adresse email est nécessaire pour rejoindre la liste de lancement. Le parcours sélectionné, « commerçant » ou « partenaire », est également enregistré afin de vous envoyer l'information correspondant à votre demande.</p>
+        <p>Des informations techniques temporaires sont utilisées pour protéger les formulaires contre les abus. WALS ne conserve pas l'adresse IP brute dans la base applicative dédiée à cette protection.</p>
       </section>
 
       <section className="legal-section">
-        <h2>Finalité et base juridique</h2>
-        <p>La finalité est strictement limitée à l'envoi de l'information d'ouverture du parcours WALS demandé et à la protection technique du formulaire. L'inscription repose sur votre consentement, matérialisé par la saisie volontaire de votre email puis l'action « Me prévenir au lancement ». La date du consentement et la version de la mention affichée sont enregistrées afin de documenter ce choix.</p>
-        <p>Cette inscription n'autorise pas WALS à utiliser l'adresse pour des promotions commerciales générales sans base légale appropriée. Elle ne constitue ni une commande, ni une création de compte, ni une demande d'accès contractuelle.</p>
+        <h2>Finalités et base juridique</h2>
+        <p>Votre adresse email est utilisée pour vous prévenir de l'ouverture du parcours WALS demandé. Ce traitement repose sur votre consentement, donné lorsque vous saisissez volontairement votre adresse et validez votre inscription.</p>
+        <p>Cette inscription ne vaut ni commande, ni création de compte, ni consentement à recevoir des communications promotionnelles sans lien avec l'ouverture de WALS.</p>
       </section>
 
       <section className="legal-section">
-        <h2>Destinataires et sous-traitants</h2>
-        <p>L'adresse email est destinée aux personnes habilitées à gérer le lancement WALS et aux prestataires techniques nécessaires au fonctionnement du service. Supabase est utilisé pour le stockage applicatif. Vercel est utilisé pour l'hébergement applicatif ainsi que pour les mesures d'audience et de performance activées dans le code.</p>
-        <p>Les données ne sont pas vendues ni cédées à des tiers à des fins de prospection commerciale.</p>
+        <h2>Destinataires et prestataires</h2>
+        <p>Les données sont accessibles uniquement aux personnes habilitées à gérer le lancement de WALS et aux prestataires techniques nécessaires au fonctionnement du site. Supabase est utilisé pour le stockage applicatif et Vercel pour l'hébergement, la mesure d'audience et le suivi des performances.</p>
+        <p>Les données ne sont ni vendues ni cédées à des tiers à des fins de prospection commerciale.</p>
       </section>
 
       <section className="legal-section">
         <h2>Mesure d'audience et performance</h2>
-        <p>Le site utilise Vercel Web Analytics et Vercel Speed Insights. Vercel indique que Web Analytics repose sur des données agrégées et anonymisées sans cookie tiers et qu'il ne permet pas de suivre un visiteur entre différents sites. Speed Insights collecte des métriques de performance anonymes qui ne sont pas associées à un visiteur ou à une adresse IP.</p>
-        <p>Le détail du dispositif actuel est présenté sur la page <Link href="/cookies">Cookies et mesure d'audience</Link>.</p>
+        <p>WALS utilise Vercel Web Analytics et Vercel Speed Insights afin de mesurer la fréquentation du site et ses performances techniques. Les informations relatives à ces outils sont détaillées sur la page <Link href="/cookies">Cookies et mesure d'audience</Link>.</p>
       </section>
 
       <section className="legal-section">
         <h2>Transferts hors Espace économique européen</h2>
-        <p>Certains prestataires d'infrastructure peuvent traiter des informations techniques en dehors de l'Espace économique européen. Vercel indique notamment utiliser, lorsque cela est requis, le cadre UE–États-Unis de protection des données et/ou des clauses contractuelles types ou autres mécanismes appropriés. Les garanties applicables dépendent du service effectivement utilisé et de sa configuration.</p>
+        <p>Certains prestataires techniques peuvent traiter des informations en dehors de l'Espace économique européen. Lorsque cela est nécessaire, ces transferts reposent sur les mécanismes juridiques prévus par la réglementation applicable.</p>
       </section>
 
       <section className="legal-section">
         <h2>Durée de conservation</h2>
-        <p>L'inscription de lancement est conservée jusqu'au premier des événements suivants : retrait de votre consentement, fin de la finalité de lancement, ou 24 mois après la dernière inscription volontaire. Une tâche de purge quotidienne supprime automatiquement les inscriptions arrivées à échéance. Les compteurs anti-abus sont temporaires et expirent automatiquement.</p>
+        <p>Votre inscription est conservée jusqu'au premier des événements suivants : retrait de votre consentement, fin de la finalité de lancement ou expiration du délai maximal de 24 mois après votre dernière inscription volontaire. Les données techniques utilisées pour limiter les abus sont conservées pour une durée courte.</p>
       </section>
 
       <section className="legal-section">
         <h2>Vos droits</h2>
-        <p>Vous pouvez demander l'accès, la rectification, l'effacement, la limitation ou, lorsque les conditions sont réunies, la portabilité de vos données. Vous pouvez retirer votre consentement à tout moment sans remettre en cause la licéité des traitements effectués avant ce retrait.</p>
-        <p>Vous pouvez exercer ces droits à <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
+        <p>Vous pouvez demander l'accès, la rectification, l'effacement ou la limitation de vos données et, lorsque les conditions sont réunies, leur portabilité. Vous pouvez également retirer votre consentement à tout moment.</p>
+        <p>Pour exercer vos droits, écrivez à <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Vous disposez également du droit d'introduire une réclamation auprès de la CNIL.</p>
       </section>
 
       <section className="legal-section">
         <h2>Désinscription</h2>
-        <p>La page <Link href="/desinscription">Désinscription</Link> permet de supprimer l'inscription correspondant à une adresse de l'ensemble des informations de lancement WALS. La suppression est immédiate côté liste de lancement. Pour protéger la confidentialité, le résultat ne révèle jamais si l'adresse était auparavant inscrite.</p>
+        <p>La page <Link href="/desinscription">Désinscription</Link> permet de retirer immédiatement une adresse de la liste de lancement WALS. Pour préserver la confidentialité, le résultat ne révèle pas si l'adresse était inscrite auparavant.</p>
       </section>
     </LegalPageShell>
   );
