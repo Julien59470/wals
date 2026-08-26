@@ -1,0 +1,1 @@
+drop index if exists public.launch_subscriptions_audience_consent_idx;

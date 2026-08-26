@@ -8,3 +8,8 @@
 @import "./motion.css";
 @import "./styles/audiences.css";
 @import "./styles/performance.css";
+
+:root {
+  --font-sans: var(--font-manrope), Arial, sans-serif;
+  --font-display: var(--font-manrope), Arial, sans-serif;
+}

@@ -20,7 +20,7 @@ export function LegalPageShell({
     <>
       <main className={`legal-page ${className}`.trim()}>
         <div className="legal-shell">
-          <BrandMark />
+          <BrandMark href="/" />
           <span className="eyebrow dark">{eyebrow}</span>
           <h1>{title}</h1>
           <div className="legal-intro">{intro}</div>

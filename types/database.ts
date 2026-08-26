@@ -1,39 +1,19 @@
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
-
 type EmptyRelationships = [];
 
 export type Database = {
-  __InternalSupabase: { PostgrestVersion: "14.15" };
+  __InternalSupabase: { PostgrestVersion: "14.17" };
   public: {
     Tables: {
       launch_subscriptions: {
-        Row: { audience: string; consent_at: string; consent_version: string; email: string; expires_at: string; id: string; source: string; unsubscribed_at: string | null };
-        Insert: { audience: string; consent_at?: string; consent_version?: string; email: string; expires_at?: string; id?: string; source?: string; unsubscribed_at?: string | null };
-        Update: { audience?: string; consent_at?: string; consent_version?: string; email?: string; expires_at?: string; id?: string; source?: string; unsubscribed_at?: string | null };
-        Relationships: EmptyRelationships;
-      };
-      website_leads: {
-        Row: { activity: string | null; audience: string; business_name: string | null; created_at: string; email: string; full_name: string; id: string; marketing_opt_in: boolean; message: string | null; phone: string | null; privacy_acknowledged: boolean; source: string; status: string };
-        Insert: { activity?: string | null; audience: string; business_name?: string | null; created_at?: string; email: string; full_name: string; id?: string; marketing_opt_in?: boolean; message?: string | null; phone?: string | null; privacy_acknowledged: boolean; source?: string; status?: string };
-        Update: { activity?: string | null; audience?: string; business_name?: string | null; created_at?: string; email?: string; full_name?: string; id?: string; marketing_opt_in?: boolean; message?: string | null; phone?: string | null; privacy_acknowledged?: boolean; source?: string; status?: string };
+        Row: { audience: string; consent_at: string; consent_version: string; email: string; expires_at: string; id: string; source: string };
+        Insert: { audience: string; consent_at?: string; consent_version?: string; email: string; expires_at?: string; id?: string; source?: string };
+        Update: { audience?: string; consent_at?: string; consent_version?: string; email?: string; expires_at?: string; id?: string; source?: string };
         Relationships: EmptyRelationships;
       };
       website_rate_limits: {
         Row: { bucket: string; expires_at: string; hits: number };
         Insert: { bucket: string; expires_at: string; hits?: number };
         Update: { bucket?: string; expires_at?: string; hits?: number };
-        Relationships: EmptyRelationships;
-      };
-      partner_leads: {
-        Row: { activity: string; consent_privacy: boolean; created_at: string; email: string; full_name: string; id: string; message: string | null; phone: string | null; source: string; status: string };
-        Insert: { activity: string; consent_privacy?: boolean; created_at?: string; email: string; full_name: string; id?: string; message?: string | null; phone?: string | null; source?: string; status?: string };
-        Update: { activity?: string; consent_privacy?: boolean; created_at?: string; email?: string; full_name?: string; id?: string; message?: string | null; phone?: string | null; source?: string; status?: string };
-        Relationships: EmptyRelationships;
-      };
-      partner_waitlist: {
-        Row: { consent_launch: boolean; created_at: string; email: string; id: string; source: string; unsubscribed_at: string | null };
-        Insert: { consent_launch?: boolean; created_at?: string; email: string; id?: string; source?: string; unsubscribed_at?: string | null };
-        Update: { consent_launch?: boolean; created_at?: string; email?: string; id?: string; source?: string; unsubscribed_at?: string | null };
         Relationships: EmptyRelationships;
       };
     };

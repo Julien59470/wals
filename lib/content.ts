@@ -1,22 +1,3 @@
-export type FeatureStatus = "En préparation" | "Aperçu produit";
-
-export type ProductFeature = {
-  title: string;
-  description: string;
-  merchantBenefit: string;
-  partnerAngle: string;
-  status: FeatureStatus;
-};
-
-export const productFeatures: ProductFeature[] = [
-  { title: "Carte de fidélité digitale", description: "Une carte pensée pour être ajoutée au Wallet du client, sans application WALS dédiée à installer.", merchantBenefit: "Remplacer la carte papier par une expérience plus simple à conserver et à retrouver.", partnerAngle: "Une première offre facile à présenter à un commerce avec son identité et ses récompenses.", status: "Aperçu produit" },
-  { title: "Récompenses et mécanique d'engagement", description: "Tampons, points, avantages et expériences ludiques pour donner une raison concrète de revenir.", merchantBenefit: "Créer des récompenses adaptées à la fréquence de visite et au panier moyen du commerce.", partnerAngle: "Construire plusieurs niveaux d'offre autour de la fidélité et de l'engagement.", status: "En préparation" },
-  { title: "Communications ciblées", description: "Des campagnes et rappels conçus autour des possibilités réellement prises en charge par chaque plateforme Wallet.", merchantBenefit: "Rester présent entre deux visites avec des messages utiles et adaptés au support utilisé.", partnerAngle: "Proposer un service récurrent de fidélisation au-delà de la carte digitale.", status: "En préparation" },
-  { title: "Parrainage", description: "Des parcours permettant à un client satisfait de recommander le commerce et d'être récompensé selon les règles définies.", merchantBenefit: "Transformer la satisfaction en acquisition mesurable.", partnerAngle: "Ajouter une brique d'acquisition locale à l'offre de fidélité.", status: "En préparation" },
-  { title: "Base clients et statistiques", description: "Une vision synthétique de l'activité, des cartes, des visites, des récompenses et des actions commerciales.", merchantBenefit: "Décider à partir d'indicateurs simples plutôt que de piloter la fidélité à l'intuition.", partnerAngle: "Suivre les résultats des commerces et disposer d'arguments de renouvellement plus solides.", status: "En préparation" },
-  { title: "Avis et réputation locale", description: "Des parcours destinés à faciliter la sollicitation d'avis dans le respect des règles des plateformes concernées.", merchantBenefit: "Relier fidélité et visibilité locale avec une expérience cohérente pour le client.", partnerAngle: "Créer une offre plus complète autour de la rétention et de la réputation.", status: "En préparation" },
-];
-
 export const partnerSupport = [
   { title: "Démos commerciales personnalisées", description: "Préparer une démonstration visuelle au nom du prospect pour rendre l'offre immédiatement concrète." },
   { title: "Supports de vente", description: "Présentations, fiches d'offre, QR codes et visuels adaptables pour structurer la prospection." },

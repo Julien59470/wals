@@ -8,7 +8,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-container footer-grid">
         <div>
-          <BrandMark compact />
+          <BrandMark compact href="/" />
           <p>WALS prépare deux parcours de fidélité digitale : un pour les commerces et un pour les partenaires et revendeurs.</p>
         </div>
         <nav aria-label="Parcours WALS">
