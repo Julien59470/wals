@@ -41,12 +41,12 @@ export function AudienceHeader({ audience }: { audience?: Audience }) {
   }, [open]);
 
   const contactHref = audience === "partner" ? "/partenaires#ouverture" : audience === "merchant" ? "/commercants#contact" : "#choix";
-  const contactLabel = audience === "partner" ? "Accès partenaire" : audience === "merchant" ? "Demander une présentation" : "Choisir mon parcours";
+  const contactLabel = audience ? "Être prévenu du lancement" : "Choisir mon parcours";
 
   return (
     <header ref={headerRef} className="site-header" data-site-header>
       <div className="header-inner">
-        <Link className="header-brand" href="/" aria-label="Accueil WALS" onClick={() => closeMenu(false)}><BrandMark /></Link>
+        <Link className="header-brand" href="/" aria-label="Accueil WALS" onClick={() => closeMenu(false)}><BrandMark priority /></Link>
         <nav className="audience-header-nav" aria-label="Choisir son parcours WALS">
           <Link className={audience === "merchant" ? "is-active" : ""} href="/commercants">Pour les commerçants</Link>
           <Link className={audience === "partner" ? "is-active" : ""} href="/partenaires">Pour les partenaires</Link>

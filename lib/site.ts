@@ -8,7 +8,7 @@ export const isIndexableProduction =
 
 export const siteName = "WALS";
 export const contactEmail = "contact@wals.fr";
-export const releaseDate = "2026-08-25";
+export const releaseDate = "2026-08-26";
 
 export const audienceRoutes = {
   merchant: "/commercants",

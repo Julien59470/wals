@@ -1,0 +1,67 @@
+/* Typographie, rendu critique et optimisations de peinture. */
+:root {
+  --font-sans: var(--font-manrope), "Segoe UI", Arial, sans-serif;
+  --font-display: var(--font-manrope), "Segoe UI", Arial, sans-serif;
+}
+
+html { font-family: var(--font-sans); }
+body { font-family: var(--font-sans); font-synthesis: none; font-optical-sizing: auto; letter-spacing: -.008em; }
+.bo-site h1,.bo-site h2,.bo-site h3,.subhero h1,.section-heading h2,.split-section h2,.legal-shell h1 { font-family: var(--font-display); font-weight: 720; letter-spacing: -.044em; }
+.bo-site p,.subhero p,.section-heading p,.legal-shell p,.legal-shell li { letter-spacing: -.006em; }
+
+/* Le contenu critique reste visible avant l'hydratation : le LCP ne dépend plus du JavaScript. */
+[data-reveal] { opacity: 1; transform: none; }
+html.motion-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(22px); }
+html.motion-ready #top [data-reveal] { opacity: 1; transform: none; }
+
+/* Les sections hors écran reportent leur mise en page et leur peinture. */
+.bo-site main > section:nth-of-type(n+3),
+main > .section:nth-of-type(n+2) {
+  content-visibility: auto;
+  contain-intrinsic-size: 760px;
+}
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+
+.device { contain: layout style; }
+.dashboard-frame,.dashboard-mobile,.bo-fidelya-shell,.bo-side-card { contain: layout style; }
+
+/* Formulaire minimal de notification de lancement. */
+.launch-notify-form { display: grid; gap: 10px; width: 100%; }
+.contact-grid > .launch-notify-form { padding: 24px; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; background: rgba(255,255,255,.055); backdrop-filter: blur(14px); box-shadow: 0 24px 60px rgba(0,0,0,.12); }
+.launch-notify-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; }
+.launch-notify-row input[type="email"] { width: 100%; min-height: 54px; padding: 0 16px; border: 1px solid rgba(255,255,255,.2); border-radius: 13px; background: rgba(255,255,255,.96); color: var(--wals-navy); outline: 0; font-size: 14px; font-weight: 560; }
+.launch-notify-row input[type="email"]::placeholder { color: #8794a2; }
+.launch-notify-row input[type="email"]:focus { border-color: var(--wals-orange); box-shadow: 0 0 0 4px rgba(255,109,27,.14); }
+.launch-notify-row button { min-height: 54px; padding: 0 18px; border: 0; border-radius: 13px; background: var(--wals-orange); color: #fff; cursor: pointer; font-size: 12px; font-weight: 800; white-space: nowrap; transition: transform .2s ease,background .2s ease; }
+.launch-notify-row button:hover:not(:disabled) { transform: translateY(-1px); background: #ff7b2e; }
+.launch-notify-row button:disabled { cursor: wait; opacity: .68; }
+.launch-notify-privacy,.launch-notify-status { margin: 0; color: rgba(255,255,255,.58); font-size: 10px; line-height: 1.55; }
+.launch-notify-privacy a { color: rgba(255,255,255,.86); text-decoration: underline; text-underline-offset: 2px; }
+.launch-notify-status { min-height: 16px; font-weight: 700; }
+.launch-notify-status.success { color: #a7eac2; }
+.launch-notify-status.error { color: #ffc0b5; }
+.sr-only { position: absolute!important; width: 1px!important; height: 1px!important; padding: 0!important; margin: -1px!important; overflow: hidden!important; clip: rect(0,0,0,0)!important; white-space: nowrap!important; border: 0!important; }
+.dashboard-demo-note { margin: 10px 0 0; color: var(--wals-gray); font-size: 10px; text-align: right; }
+.bo-cockpit .dashboard-demo-note { padding-right: 4px; }
+
+@media (max-width: 1024px) {
+  .header-inner,.gateway-choice,.gateway-float,.merchant-stage-card,.sector-hero-card,.contact-grid > .launch-notify-form,.bo-final-form { backdrop-filter: none!important; -webkit-backdrop-filter: none!important; }
+  .bo-hero-glow { filter: blur(56px); }
+  .viewport-vignette { box-shadow: inset 0 0 54px rgba(3,11,24,.035); }
+}
+
+@media (max-width: 700px) {
+  .cursor-glow,.viewport-vignette { display: none; }
+  .launch-notify-row { grid-template-columns: 1fr; }
+  .launch-notify-row button { width: 100%; }
+  .contact-grid > .launch-notify-form { padding: 18px; }
+  .bo-hero-glow { filter: blur(42px); opacity: .7; }
+  .bo-hero-grid-bg { animation: none!important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready [data-reveal]:not(.is-visible) { opacity: 1; transform: none; }
+}

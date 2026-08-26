@@ -4,10 +4,10 @@ import { MerchantExperience } from "@/components/landing/MerchantExperience";
 import { canonicalDomain } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Carte de fidélité digitale pour commerces — WALS",
-  description: "Fidélité Wallet, récompenses, parrainage, campagnes et statistiques : découvrez le parcours WALS destiné directement aux commerces de proximité.",
+  title: "Future carte de fidélité digitale pour commerces — WALS",
+  description: "WALS est en développement : découvrez le futur parcours Wallet, récompenses, parrainage, campagnes et statistiques destiné aux commerces de proximité.",
   alternates: { canonical: "/commercants" },
-  openGraph: { type: "website", url: `${canonicalDomain}/commercants`, title: "WALS pour les commerces — Faites revenir vos clients", description: "Une expérience de fidélité digitale pensée pour rester simple au comptoir et visible dans le téléphone du client." },
+  openGraph: { type: "website", url: `${canonicalDomain}/commercants`, title: "WALS pour les commerces — Plateforme en développement", description: "Découvrez l'expérience de fidélité digitale que WALS prépare pour les commerces et inscrivez-vous pour être prévenu de sa sortie." },
 };
 
 export default function MerchantsPage() { return <MerchantExperience/>; }

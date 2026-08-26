@@ -43,6 +43,7 @@ export type Database = {
         Args: { p_activity: string; p_audience: string; p_business_name: string; p_email: string; p_fingerprint: string; p_full_name: string; p_marketing_opt_in: boolean; p_message: string; p_phone: string; p_privacy_acknowledged: boolean };
         Returns: string;
       };
+      subscribe_launch: { Args: { p_email: string; p_audience: string; p_fingerprint: string }; Returns: undefined };
       unsubscribe_launch: { Args: { p_email: string }; Returns: undefined };
     };
     Enums: Record<string, never>;

@@ -4,10 +4,10 @@ import { PartnerExperience } from "@/components/landing/PartnerExperience";
 import { canonicalDomain } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Solution de fidélité en marque blanche pour partenaires — WALS",
-  description: "Créez votre marque, vos offres et vos tarifs. WALS prépare la technologie, les démonstrations et le cockpit pour partenaires, agences et commerciaux.",
+  title: "Future solution de fidélité en marque blanche pour partenaires — WALS",
+  description: "Le programme partenaire WALS est en développement : marque blanche, démonstrations, tarifs de revente libres et futur cockpit pour agences, indépendants et commerciaux.",
   alternates: { canonical: "/partenaires" },
-  openGraph: { type: "website", url: `${canonicalDomain}/partenaires`, title: "WALS partenaires — Votre marque devant, notre technologie derrière", description: "Construisez votre propre offre de fidélité digitale avec vos prix, vos prospects et vos clients." },
+  openGraph: { type: "website", url: `${canonicalDomain}/partenaires`, title: "WALS partenaires — Programme en cours de développement", description: "Découvrez le futur parcours partenaire WALS et soyez prévenu dès son ouverture." },
 };
 
 export default function PartnersPage() { return <PartnerExperience/>; }

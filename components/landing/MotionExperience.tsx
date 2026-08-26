@@ -27,7 +27,7 @@ export function MotionExperience() {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!finePointer.matches || reducedMotion.matches || event.pointerType === "touch") return;
+      if (event.pointerType === "touch") return;
       pendingX = event.clientX;
       pendingY = event.clientY;
       if (!pointerFrame) pointerFrame = window.requestAnimationFrame(renderPointer);
@@ -57,24 +57,33 @@ export function MotionExperience() {
           }
         }
       },
-      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" },
+      { threshold: 0.06, rootMargin: "0px 0px -4% 0px" },
     );
 
     const motionObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) entry.target.classList.toggle("is-motion-active", entry.isIntersecting);
       },
-      { threshold: 0.05, rootMargin: "12% 0px 12% 0px" },
+      { threshold: 0.04, rootMargin: "10% 0px 10% 0px" },
     );
 
-    revealNodes.forEach((node) => revealObserver.observe(node));
+    for (const node of revealNodes) {
+      const rect = node.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 1.05) node.classList.add("is-visible");
+      else revealObserver.observe(node);
+    }
+    root.classList.add("motion-ready");
     motionSections.forEach((node) => motionObserver.observe(node));
-    document.addEventListener("pointermove", onPointerMove, { passive: true });
-    document.addEventListener("pointerleave", onPointerLeave);
+
+    if (finePointer.matches && !reducedMotion.matches) {
+      document.addEventListener("pointermove", onPointerMove, { passive: true });
+      document.addEventListener("pointerleave", onPointerLeave);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     renderScroll();
 
     return () => {
+      root.classList.remove("motion-ready");
       if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
       if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
       revealObserver.disconnect();

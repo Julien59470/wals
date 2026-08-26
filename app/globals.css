@@ -1,11 +1,10 @@
 @import "./styles/base.css";
 @import "./styles/devices.css";
-@import "./styles/commercial.css";
 @import "./styles/cockpit.css";
-@import "./styles/closing.css";
 @import "./styles/legal.css";
 @import "./styles/responsive.css";
 @import "./styles/opportunity.css";
 @import "./styles/opportunity-motion.css";
 @import "./motion.css";
 @import "./styles/audiences.css";
+@import "./styles/performance.css";
