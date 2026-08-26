@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useId, useState } from "react";
 
 export function LaunchNotifyForm({ audience }: { audience: "merchant" | "partner" }) {
+  const id = useId();
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -30,16 +31,20 @@ export function LaunchNotifyForm({ audience }: { audience: "merchant" | "partner
     }
   }
 
+  const emailId = `launch-email-${audience}-${id}`;
+  const helpId = `launch-help-${audience}-${id}`;
+  const statusId = `launch-status-${audience}-${id}`;
+
   return (
     <form className="launch-notify-form" onSubmit={onSubmit}>
-      <label className="sr-only" htmlFor={`launch-email-${audience}`}>Votre adresse email</label>
+      <label className="sr-only" htmlFor={emailId}>Votre adresse email</label>
       <div className="launch-notify-row">
-        <input id={`launch-email-${audience}`} name="email" type="email" inputMode="email" autoComplete="email" placeholder="votre@email.fr" required />
+        <input id={emailId} name="email" type="email" inputMode="email" autoComplete="email" placeholder="votre@email.fr" aria-describedby={`${helpId} ${statusId}`} required />
         <button type="submit" disabled={state === "loading"}>{state === "loading" ? "Inscription…" : "Me prévenir au lancement"}</button>
       </div>
       <input className="honeypot" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      <p className="launch-notify-privacy">En vous inscrivant, vous demandez uniquement à recevoir l'information d'ouverture de WALS pour ce parcours. Désinscription possible à tout moment. <a href="/confidentialite">Confidentialité</a></p>
-      <p className={`launch-notify-status ${state}`} aria-live="polite">{message}</p>
+      <p className="launch-notify-privacy" id={helpId}>Votre email sert uniquement à vous prévenir de l'ouverture de ce parcours WALS. Il n'est pas utilisé pour des promotions générales ni cédé à des tiers à des fins commerciales. Retrait possible à tout moment via la <a href="/desinscription">désinscription</a>. <a href="/confidentialite">En savoir plus sur vos données</a>.</p>
+      <p className={`launch-notify-status ${state}`} id={statusId} role="status" aria-live="polite">{message}</p>
     </form>
   );
 }

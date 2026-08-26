@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
-import { canonicalDomain, isIndexableProduction, siteName, siteUrl } from "@/lib/site";
+import { canonicalDomain, contactEmail, isIndexableProduction, siteName, siteUrl } from "@/lib/site";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -37,7 +37,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "WebSite", "@id": `${canonicalDomain}/#website`, url: canonicalDomain, name: siteName, inLanguage: "fr-FR" },
-    { "@type": "Organization", "@id": `${canonicalDomain}/#organization`, name: siteName, url: canonicalDomain, logo: `${canonicalDomain}/wals-logo.png`, email: "contact@wals.fr" },
+    { "@type": "Organization", "@id": `${canonicalDomain}/#organization`, name: siteName, url: canonicalDomain, logo: `${canonicalDomain}/wals-logo.png`, email: contactEmail },
   ],
 };
 

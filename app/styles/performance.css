@@ -2,6 +2,8 @@
 :root {
   --font-sans: var(--font-manrope), "Segoe UI", Arial, sans-serif;
   --font-display: var(--font-manrope), "Segoe UI", Arial, sans-serif;
+  --wals-orange-action: #c64800;
+  --wals-orange-dark: #b84000;
 }
 
 html { font-family: var(--font-sans); }
@@ -34,18 +36,25 @@ main > .section:nth-of-type(n+2) {
 .launch-notify-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; }
 .launch-notify-row input[type="email"] { width: 100%; min-height: 54px; padding: 0 16px; border: 1px solid rgba(255,255,255,.2); border-radius: 13px; background: rgba(255,255,255,.96); color: var(--wals-navy); outline: 0; font-size: 14px; font-weight: 560; }
 .launch-notify-row input[type="email"]::placeholder { color: #8794a2; }
-.launch-notify-row input[type="email"]:focus { border-color: var(--wals-orange); box-shadow: 0 0 0 4px rgba(255,109,27,.14); }
-.launch-notify-row button { min-height: 54px; padding: 0 18px; border: 0; border-radius: 13px; background: var(--wals-orange); color: #fff; cursor: pointer; font-size: 12px; font-weight: 800; white-space: nowrap; transition: transform .2s ease,background .2s ease; }
-.launch-notify-row button:hover:not(:disabled) { transform: translateY(-1px); background: #ff7b2e; }
+.launch-notify-row input[type="email"]:focus { border-color: var(--wals-orange-action); box-shadow: 0 0 0 4px rgba(198,72,0,.14); }
+.launch-notify-row button { min-height: 54px; padding: 0 18px; border: 0; border-radius: 13px; background: var(--wals-orange-action); color: #fff; cursor: pointer; font-size: 12px; font-weight: 800; white-space: nowrap; transition: transform .2s ease,background .2s ease; }
+.launch-notify-row button:hover:not(:disabled) { transform: translateY(-1px); background: #a83d00; }
 .launch-notify-row button:disabled { cursor: wait; opacity: .68; }
-.launch-notify-privacy,.launch-notify-status { margin: 0; color: rgba(255,255,255,.58); font-size: 10px; line-height: 1.55; }
-.launch-notify-privacy a { color: rgba(255,255,255,.86); text-decoration: underline; text-underline-offset: 2px; }
+.launch-notify-privacy,.launch-notify-status { margin: 0; color: rgba(255,255,255,.72); font-size: 10px; line-height: 1.55; }
+.launch-notify-privacy a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
 .launch-notify-status { min-height: 16px; font-weight: 700; }
 .launch-notify-status.success { color: #a7eac2; }
 .launch-notify-status.error { color: #ffc0b5; }
 .sr-only { position: absolute!important; width: 1px!important; height: 1px!important; padding: 0!important; margin: -1px!important; overflow: hidden!important; clip: rect(0,0,0,0)!important; white-space: nowrap!important; border: 0!important; }
 .dashboard-demo-note { margin: 10px 0 0; color: var(--wals-gray); font-size: 10px; text-align: right; }
 .bo-cockpit .dashboard-demo-note { padding-right: 4px; }
+
+/* Le blanc sur l'orange historique ne suffisait pas pour du texte normal. L'orange de marque reste décoratif ; les actions utilisent une teinte plus sombre. */
+:focus-visible { outline-color: var(--wals-orange-action); }
+::selection { background: var(--wals-orange-action); color: #fff; }
+.primary-link,.primary-button,.launch-notify-row button,.unsubscribe-button,.bo-primary-cta { background: var(--wals-orange-action); }
+.primary-link:hover,.primary-button:hover,.bo-primary-cta:hover { background: #a83d00; }
+.bo-price-pills button.is-active { background: var(--wals-orange-action); border-color: var(--wals-orange-action); color: #fff; }
 
 @media (max-width: 1024px) {
   .header-inner,.gateway-choice,.gateway-float,.merchant-stage-card,.sector-hero-card,.contact-grid > .launch-notify-form,.bo-final-form { backdrop-filter: none!important; -webkit-backdrop-filter: none!important; }

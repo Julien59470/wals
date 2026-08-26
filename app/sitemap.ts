@@ -11,20 +11,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/commercants",
     "/partenaires",
-    "/partenaires/agences",
-    "/partenaires/independants-commerciaux",
     ...sectors.map((sector) => `/commercants/${sector.slug}`),
     "/confidentialite",
     "/mentions-legales",
+    "/cookies",
+    "/accessibilite",
   ];
 
   return paths.map((path) => {
     const changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = path === "/" ? "weekly" : "monthly";
-    return {
-      url: `${canonicalDomain}${path}`,
-      lastModified,
-      changeFrequency,
-      priority: path === "/" ? 1 : path === "/commercants" || path === "/partenaires" ? 0.9 : 0.7,
-    };
+    const priority = path === "/" ? 1 : path === "/commercants" || path === "/partenaires" ? 0.9 : path.startsWith("/commercants/") ? 0.7 : 0.4;
+    return { url: `${canonicalDomain}${path}`, lastModified, changeFrequency, priority };
   });
 }

@@ -9,26 +9,26 @@ export function SiteFooter() {
       <div className="site-container footer-grid">
         <div>
           <BrandMark compact />
-          <p>La même technologie, deux parcours : fidéliser son commerce ou construire une offre en marque blanche.</p>
+          <p>WALS est en cours de développement : un futur parcours pour les commerces et un futur parcours pour les partenaires.</p>
         </div>
         <nav aria-label="Parcours WALS">
           <strong>Parcours</strong>
           <Link href="/commercants">Commerçants</Link>
           <Link href="/partenaires">Partenaires</Link>
-          <Link href="/partenaires/agences">Agences</Link>
-          <Link href="/partenaires/independants-commerciaux">Indépendants</Link>
         </nav>
-        <nav aria-label="Informations légales">
+        <nav aria-label="Informations légales et confidentialité">
           <strong>Informations</strong>
-          <Link href="/confidentialite">Confidentialité</Link>
           <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/confidentialite">Confidentialité</Link>
+          <Link href="/cookies">Cookies & mesure d'audience</Link>
+          <Link href="/accessibilite">Accessibilité</Link>
           <Link href="/desinscription">Désinscription</Link>
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
         </nav>
       </div>
       <div className="site-container footer-bottom">
         <span>© 2026 WALS</span>
-        <span>Plateforme en cours de développement.</span>
+        <span>Plateforme en cours de développement · aucune souscription commerciale ouverte.</span>
       </div>
     </footer>
   );

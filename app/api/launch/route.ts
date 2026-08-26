@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getRequestFingerprint, isAllowedBrowserRequest, isHoneypotFilled } from "@/lib/request-security";
+import { getRequestFingerprint, isAllowedBrowserRequest, isHoneypotFilled, readPublicFormJson } from "@/lib/request-security";
 import { createPublicServerClient } from "@/lib/supabase/server";
 import { normalizeEmail } from "@/lib/validation";
 
@@ -11,12 +11,12 @@ const noStoreHeaders = { "cache-control": "no-store, max-age=0" };
 export async function POST(request: Request) {
   if (!isAllowedBrowserRequest(request)) return NextResponse.json({ message: "Origine de requête refusée." }, { status: 403, headers: noStoreHeaders });
 
-  let body: Record<string, unknown>;
-  try {
-    body = (await request.json()) as Record<string, unknown>;
-  } catch {
-    return NextResponse.json({ message: "Requête invalide." }, { status: 400, headers: noStoreHeaders });
+  const parsed = await readPublicFormJson(request);
+  if (!parsed.data) {
+    const status = parsed.error === "too_large" ? 413 : 400;
+    return NextResponse.json({ message: parsed.error === "too_large" ? "Requête trop volumineuse." : "Requête invalide." }, { status, headers: noStoreHeaders });
   }
+  const body = parsed.data;
 
   if (isHoneypotFilled(body.website)) return NextResponse.json({ message: "Votre email est enregistré." }, { headers: noStoreHeaders });
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { AudienceHeader } from "@/components/landing/AudienceHeader";
 import { LaunchNotifyForm } from "@/components/site/LaunchNotifyForm";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { SiteHeader } from "@/components/site/SiteHeader";
 import type { SectorPage as SectorData } from "@/lib/sectors";
 import { canonicalDomain } from "@/lib/site";
 
@@ -35,7 +35,7 @@ export function SectorLanding({ sector }: { sector: SectorData }) {
 
   return (
     <>
-      <SiteHeader audience="merchant" />
+      <AudienceHeader audience="merchant" />
       <main>
         <section className="subhero merchant-theme">
           <div className="site-container subhero-grid">

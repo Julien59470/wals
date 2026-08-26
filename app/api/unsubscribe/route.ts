@@ -1,32 +1,42 @@
 import { NextResponse } from "next/server";
 
-import { isAllowedBrowserRequest } from "@/lib/request-security";
+import { getRequestFingerprint, isAllowedBrowserRequest, isHoneypotFilled, readPublicFormJson } from "@/lib/request-security";
 import { createPublicServerClient } from "@/lib/supabase/server";
 import { normalizeEmail } from "@/lib/validation";
 
 export const dynamic = "force-dynamic";
 
+const noStoreHeaders = { "cache-control": "no-store, max-age=0" };
+const successMessage = "Si cette adresse était inscrite, elle a été retirée des informations de lancement WALS.";
+
 export async function POST(request: Request) {
   if (!isAllowedBrowserRequest(request)) {
-    return NextResponse.json({ message: "Origine de requête refusée." }, { status: 403, headers: { "cache-control": "no-store" } });
+    return NextResponse.json({ message: "Origine de requête refusée." }, { status: 403, headers: noStoreHeaders });
   }
 
-  let body: { email?: unknown };
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ message: "Requête invalide." }, { status: 400, headers: { "cache-control": "no-store" } });
+  const parsed = await readPublicFormJson(request);
+  if (!parsed.data) {
+    const status = parsed.error === "too_large" ? 413 : 400;
+    return NextResponse.json({ message: parsed.error === "too_large" ? "Requête trop volumineuse." : "Requête invalide." }, { status, headers: noStoreHeaders });
   }
+  const body = parsed.data;
+
+  if (isHoneypotFilled(body.website)) return NextResponse.json({ message: successMessage }, { headers: noStoreHeaders });
 
   const email = normalizeEmail(body.email);
-  if (!email) return NextResponse.json({ message: "Saisissez une adresse email valide." }, { status: 400, headers: { "cache-control": "no-store" } });
+  if (!email) return NextResponse.json({ message: "Saisissez une adresse email valide." }, { status: 400, headers: noStoreHeaders });
 
   const supabase = createPublicServerClient();
-  const { error } = await supabase.rpc("unsubscribe_launch", { p_email: email });
+  const { error } = await supabase.rpc("unsubscribe_launch_secure", {
+    p_email: email,
+    p_fingerprint: getRequestFingerprint(request),
+  });
+
   if (error) {
+    if (error.message.includes("rate_limited")) return NextResponse.json({ message: "Trop de tentatives. Réessayez dans quelques minutes." }, { status: 429, headers: noStoreHeaders });
     console.error("launch_unsubscribe_failed", { code: error.code });
-    return NextResponse.json({ message: "La désinscription n'a pas pu être traitée pour le moment." }, { status: 500, headers: { "cache-control": "no-store" } });
+    return NextResponse.json({ message: "La désinscription n'a pas pu être traitée pour le moment." }, { status: 500, headers: noStoreHeaders });
   }
 
-  return NextResponse.json({ message: "Si cette adresse était inscrite, elle ne recevra plus les informations de lancement WALS." }, { headers: { "cache-control": "no-store" } });
+  return NextResponse.json({ message: successMessage }, { headers: noStoreHeaders });
 }

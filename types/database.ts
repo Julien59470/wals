@@ -7,9 +7,9 @@ export type Database = {
   public: {
     Tables: {
       launch_subscriptions: {
-        Row: { audience: string; consent_at: string; email: string; id: string; source: string; unsubscribed_at: string | null };
-        Insert: { audience: string; consent_at?: string; email: string; id?: string; source?: string; unsubscribed_at?: string | null };
-        Update: { audience?: string; consent_at?: string; email?: string; id?: string; source?: string; unsubscribed_at?: string | null };
+        Row: { audience: string; consent_at: string; consent_version: string; email: string; expires_at: string; id: string; source: string; unsubscribed_at: string | null };
+        Insert: { audience: string; consent_at?: string; consent_version?: string; email: string; expires_at?: string; id?: string; source?: string; unsubscribed_at?: string | null };
+        Update: { audience?: string; consent_at?: string; consent_version?: string; email?: string; expires_at?: string; id?: string; source?: string; unsubscribed_at?: string | null };
         Relationships: EmptyRelationships;
       };
       website_leads: {
@@ -39,12 +39,8 @@ export type Database = {
     };
     Views: Record<string, never>;
     Functions: {
-      record_website_lead: {
-        Args: { p_activity: string; p_audience: string; p_business_name: string; p_email: string; p_fingerprint: string; p_full_name: string; p_marketing_opt_in: boolean; p_message: string; p_phone: string; p_privacy_acknowledged: boolean };
-        Returns: string;
-      };
       subscribe_launch: { Args: { p_email: string; p_audience: string; p_fingerprint: string }; Returns: undefined };
-      unsubscribe_launch: { Args: { p_email: string }; Returns: undefined };
+      unsubscribe_launch_secure: { Args: { p_email: string; p_fingerprint: string }; Returns: undefined };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;

@@ -1,10 +1,12 @@
+import { legalIdentityReady } from "@/lib/legal";
+
 const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "") || null;
 
 export const canonicalDomain = "https://wals.fr";
 export const siteUrl = configuredUrl || canonicalDomain;
 
 export const isIndexableProduction =
-  process.env.NEXT_PUBLIC_INDEXABLE === "true" && siteUrl === canonicalDomain;
+  process.env.NEXT_PUBLIC_INDEXABLE === "true" && siteUrl === canonicalDomain && legalIdentityReady;
 
 export const siteName = "WALS";
 export const contactEmail = "contact@wals.fr";
