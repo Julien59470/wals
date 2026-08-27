@@ -12,9 +12,10 @@ export function RevenueSimulator() {
   const [price, setPrice] = useState(39);
   const [clients, setClients] = useState(18);
   const monthly = useMemo(() => price * clients, [price, clients]);
+  const yearly = monthly * 12;
 
   return (
-    <div className="bo-revenue-card" data-reveal>
+    <div className="bo-revenue-card ux-revenue-card" data-reveal>
       <div className="bo-revenue-controls">
         <div className="bo-control-block">
           <div className="bo-control-head"><span>Exemple de prix mensuel</span><strong>{formatEuro(price)}</strong></div>
@@ -24,14 +25,24 @@ export function RevenueSimulator() {
         </div>
         <div className="bo-control-block">
           <div className="bo-control-head"><span>Nombre de commerces</span><strong>{clients}</strong></div>
-          <input className="bo-range" type="range" min="1" max="100" step="1" value={clients} onChange={(event) => setClients(Number(event.target.value))} aria-label="Nombre de commerces" style={{ "--range-progress": `${clients}%` } as CSSProperties} />
+          <input className="bo-range" type="range" min="1" max="100" step="1" value={clients} onChange={(event) => setClients(Number(event.target.value))} aria-label="Nombre de commerces" style={{ "--range-progress": `${clients}%` } as CSSProperties}/>
           <div className="bo-client-presets" role="group" aria-label="Exemples de portefeuille">
             {clientExamples.map((value) => <button key={value} type="button" onClick={() => setClients(value)}>{value}</button>)}
           </div>
         </div>
       </div>
-      <div className="bo-revenue-result" aria-live="polite"><div><strong>{clients}</strong><span>COMMERCES</span></div><b>×</b><div><strong>{formatEuro(price)}</strong><span>/ MOIS</span></div><b>=</b><div className="bo-revenue-total"><strong>{formatEuro(monthly)}</strong><span>/ MOIS</span></div></div>
-      <div className="bo-revenue-foot"><strong>Vous restez libre de votre tarification.</strong><small>Les montants proposés sont des exemples de tarifs de revente. Le résultat correspond à un chiffre d'affaires brut indicatif ; il ne représente pas le prix de WALS et ne constitue ni une recommandation tarifaire ni une garantie de revenu.</small></div>
+
+      <div className="ux-revenue-focus" aria-live="polite">
+        <div className="ux-revenue-formula"><span>{clients} commerces</span><b>×</b><span>{formatEuro(price)}</span></div>
+        <strong>{formatEuro(monthly)}<small>/mois</small></strong>
+        <p>{formatEuro(yearly)} / an</p>
+        <span>Chiffre d'affaires brut indicatif</span>
+      </div>
+
+      <div className="bo-revenue-foot">
+        <strong>Vous restez libre de votre tarification.</strong>
+        <small>Les montants proposés sont des exemples de tarifs de revente. Le résultat correspond à un chiffre d'affaires brut indicatif ; il ne représente pas le prix de WALS et ne constitue ni une recommandation tarifaire ni une garantie de revenu.</small>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test("la racine oriente vers les deux audiences avec la DA historique", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Comment voulez-vous/i);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(/Que souhaitez-vous faire/i);
   await expect(page.getByRole("link", { name: /parcours commerce/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /parcours partenaire/i })).toBeVisible();
   await expect(page.locator(".device.iphone")).toBeVisible();
@@ -12,16 +12,24 @@ test("la racine oriente vers les deux audiences avec la DA historique", async ({
 
 test("le parcours commerçant reste une liste de lancement simple", async ({ page }) => {
   await page.goto("/commercants");
-  await expect(page.getByText(/Ouverture prochaine/i).first()).toBeVisible();
+  await expect(page.getByText(/Aperçu avant ouverture/i).first()).toBeVisible();
   await expect(page.getByRole("button", { name: /Me prévenir de l'ouverture/i })).toBeVisible();
   await expect(page.locator('input[name="email"]')).toHaveCount(1);
   await expect(page.locator('input[name="fullName"]')).toHaveCount(0);
+});
+
+test("les fonctionnalités commerçants sont interactives", async ({ page }) => {
+  await page.goto("/commercants");
+  await expect(page.getByRole("tab", { name: "Fidélité" })).toHaveAttribute("aria-selected", "true");
+  await page.getByRole("tab", { name: "Campagnes" }).click();
+  await expect(page.getByRole("tabpanel")).toContainText(/Créez une vraie raison de revenir/i);
 });
 
 test("le parcours partenaire conserve les scénarios 29 à 69 euros", async ({ page }) => {
   await page.goto("/partenaires");
   for (const price of [29, 39, 49, 59, 69]) await expect(page.getByRole("button", { name: `${price} €`, exact: true })).toBeVisible();
   await expect(page.getByText(/ne représente pas le prix de WALS/i)).toBeVisible();
+  await expect(page.getByText(/8.*424.*an/i)).toBeVisible();
 });
 
 test("les liens agences et indépendants ont disparu et les anciennes URL sont redirigées", async ({ page }) => {

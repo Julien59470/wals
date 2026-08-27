@@ -2,32 +2,142 @@ import Link from "next/link";
 
 import { AudienceHeader } from "@/components/landing/AudienceHeader";
 import { MerchantDashboardMockup } from "@/components/landing/MerchantDashboardMockup";
+import { MerchantFeatureTabs } from "@/components/landing/MerchantFeatureTabs";
+import { MerchantJourney } from "@/components/landing/MerchantJourney";
 import { MotionExperience } from "@/components/landing/MotionExperience";
 import { Iphone, Samsung } from "@/components/landing/ProductDevices";
-import { ArrowIcon, BenefitInterface, CheckIcon } from "@/components/landing/VisualInterfaces";
+import { ArrowIcon, CheckIcon } from "@/components/landing/VisualInterfaces";
 import { LaunchNotifyForm } from "@/components/site/LaunchNotifyForm";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { merchantFaq } from "@/lib/content";
 import { sectors } from "@/lib/sectors";
 
+const sectorVisuals = ["RESTO", "COIFFURE", "FOURNIL", "BEAUTÉ", "LOCAL"] as const;
+
 export function MerchantExperience() {
-  return <div className="site-shell bo-site merchant-site"><MotionExperience/><AudienceHeader audience="merchant"/><main>
-    <section id="top" className="bo-hero merchant-hero" data-motion-section><div className="bo-hero-grid-bg"/><div className="bo-hero-glow bo-hero-glow-a"/><div className="bo-hero-glow bo-hero-glow-b"/><div className="site-container bo-hero-layout"><div className="bo-hero-copy" data-reveal><div className="bo-dev-note"><i/> Ouverture prochaine</div><p className="bo-overline">FIDÉLITÉ DIGITALE · RÉCOMPENSES · ENGAGEMENT</p><h1>Faites revenir vos clients. <span>Plus souvent.</span></h1><p className="bo-hero-promise">Une fidélité simple à garder. <strong>Une relation qui continue après le passage en caisse.</strong></p><p className="bo-hero-lead">WALS prépare une expérience de fidélité digitale directement dans le téléphone de vos clients, avec récompenses, campagnes, parrainage et suivi pensés pour les commerces de proximité.</p><div className="bo-hero-actions"><a className="bo-primary-cta" href="#contact">Être prévenu de l'ouverture <ArrowIcon/></a></div><div className="bo-proof-row"><span><CheckIcon/> Carte de fidélité Wallet</span><span><CheckIcon/> Sans application WALS dédiée</span><span><CheckIcon/> Programme personnalisable</span></div></div>
-      <div className="merchant-stage" data-reveal><Iphone/><Samsung/><div className="merchant-stage-card"><small>PRÉVISUALISATION WALS</small><strong>La fidélité reste dans le téléphone.</strong><span>Les interfaces présentées illustrent l'expérience WALS avant son ouverture.</span></div></div>
-    </div></section>
+  return (
+    <div className="site-shell bo-site merchant-site">
+      <MotionExperience/>
+      <AudienceHeader audience="merchant"/>
+      <main>
+        <section id="top" className="bo-hero merchant-hero ux-merchant-hero" data-motion-section>
+          <div className="bo-hero-grid-bg"/>
+          <div className="bo-hero-glow bo-hero-glow-a"/>
+          <div className="bo-hero-glow bo-hero-glow-b"/>
+          <div className="site-container bo-hero-layout">
+            <div className="bo-hero-copy" data-reveal>
+              <div className="bo-dev-note"><i/> Aperçu avant ouverture</div>
+              <p className="bo-overline">FIDÉLITÉ DIGITALE · RÉCOMPENSES · ENGAGEMENT</p>
+              <h1>Faites revenir vos clients. <span>Plus souvent.</span></h1>
+              <p className="bo-hero-promise">Une fidélité simple à utiliser. <strong>Une relation qui continue après chaque visite.</strong></p>
+              <p className="bo-hero-lead">Carte Wallet, récompenses, campagnes, parrainage et suivi client : WALS réunit les outils essentiels pour fidéliser vos clients depuis un seul espace.</p>
+              <div className="bo-hero-actions"><a className="bo-primary-cta" href="#contact">Me prévenir de l'ouverture <ArrowIcon/></a></div>
+              <div className="bo-proof-row ux-hero-reassurance">
+                <span><CheckIcon/> Sans application à télécharger</span>
+                <span><CheckIcon/> Compatible Wallet</span>
+                <span><CheckIcon/> Mise en place simple</span>
+              </div>
+            </div>
 
-    <section className="bo-opportunity dark-section merchant-flow" data-motion-section><div className="site-container bo-section-layout"><div className="bo-section-copy" data-reveal><p className="section-index light">01 / LE PRINCIPE</p><h2>Du premier passage <span>au prochain retour.</span></h2><p>WALS reliera l'expérience Wallet, les récompenses et les actions de réactivation pour proposer un programme simple côté client et clair côté commerce.</p></div><div className="bo-opportunity-flow" data-reveal><div className="bo-flow-node is-wals"><small>PASSAGE</small><strong>CLIENT</strong></div><i>↓</i><div className="bo-flow-node is-brand"><small>FIDÉLITÉ</small><strong>WALLET</strong></div><i>↓</i><div className="bo-flow-node"><small>MOTIVATION</small><strong>RÉCOMPENSE</strong></div><i>↓</i><div className="bo-flow-node is-money"><small>OBJECTIF</small><strong>RETOUR</strong></div></div><p className="bo-opportunity-line" data-reveal>Une mécanique visible côté client. <strong>Un pilotage clair côté commerce.</strong></p></div></section>
+            <div className="merchant-stage ux-merchant-stage" data-reveal>
+              <Iphone/>
+              <Samsung/>
+              <div className="merchant-stage-card ux-stage-card">
+                <small>EXPÉRIENCE WALS</small>
+                <strong>La fidélité directement dans le Wallet.</strong>
+                <span>Une expérience simple à retrouver, sans application WALS dédiée.</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <section id="solutions" className="bo-benefits light-section" data-motion-section><div className="site-container"><div className="bo-heading-row" data-reveal><p className="section-index">02 / EXPÉRIENCE WALS</p><div><h2>Des fonctionnalités pensées <span>pour le commerce de proximité.</span></h2><p>Découvrez les principales expériences prévues pour fidéliser, engager et mieux suivre vos clients.</p></div></div><div className="bo-benefit-grid"><article className="bo-benefit-card bo-benefit-wide" data-reveal><div className="bo-benefit-copy"><span>01</span><h3>Carte de fidélité digitale</h3><p>Une carte pensée pour rester accessible dans le Wallet du client.</p><em className="bo-feature-status">Aperçu produit</em></div><div className="bo-benefit-visual bo-phone-crop"><Iphone compact/></div></article><article className="bo-benefit-card" data-reveal><div className="bo-benefit-copy"><span>02</span><h3>Parrainage</h3><p>Un parcours conçu pour encourager les clients satisfaits à recommander votre commerce.</p><em className="bo-feature-status">En préparation</em></div><div className="bo-benefit-visual"><BenefitInterface type="referral"/></div></article><article className="bo-benefit-card" data-reveal><div className="bo-benefit-copy"><span>03</span><h3>Campagnes ciblées</h3><p>Des outils pour créer une raison pertinente de revenir entre deux visites.</p><em className="bo-feature-status">En préparation</em></div><div className="bo-benefit-visual"><BenefitInterface type="campaign"/></div></article><article className="bo-benefit-card" data-reveal><div className="bo-benefit-copy"><span>04</span><h3>Jeux et récompenses</h3><p>Des expériences ludiques conçues pour renforcer l'engagement autour du programme.</p><em className="bo-feature-status">Aperçu produit</em></div><div className="bo-benefit-visual bo-phone-crop is-play"><Samsung compact/></div></article><article className="bo-benefit-card bo-benefit-wide" data-reveal><div className="bo-benefit-copy"><span>05</span><h3>Suivi et statistiques</h3><p>Un espace pour comprendre l'utilisation du programme et ajuster vos actions.</p><em className="bo-feature-status">En préparation</em></div><div className="bo-benefit-visual"><BenefitInterface type="stats"/></div></article></div></div></section>
+        <section className="bo-opportunity dark-section merchant-flow ux-journey-section" data-motion-section>
+          <div className="site-container">
+            <div className="ux-centered-heading" data-reveal>
+              <p className="section-index light">01 / LE PARCOURS CLIENT</p>
+              <h2>Du premier passage <span>au prochain retour.</span></h2>
+              <p>Transformez chaque passage en occasion de faire revenir vos clients. WALS réunit fidélité, récompenses et relances dans une expérience simple, directement sur leur téléphone.</p>
+            </div>
+            <MerchantJourney/>
+          </div>
+        </section>
 
-    <section id="fonctionnement" className="bo-start dark-section" data-motion-section><div className="site-container"><div className="bo-heading-row bo-heading-light" data-reveal><p className="section-index light">03 / FONCTIONNEMENT</p><div><h2>Simple au comptoir. <span>Visible dans le téléphone.</span></h2><p>Le parcours est pensé pour rester fluide au quotidien et éviter de transformer la fidélité en opération compliquée.</p></div></div><div className="bo-start-grid"><article data-reveal><span>01</span><h3>Présenter le programme</h3><p>Un QR code donnera accès au parcours de fidélité.</p></article><article data-reveal><span>02</span><h3>Ajouter la carte</h3><p>Le client conservera sa carte dans l'écosystème Wallet compatible.</p></article><article data-reveal><span>03</span><h3>Suivre sa progression</h3><p>Les visites et récompenses seront matérialisées de manière claire.</p></article><article data-reveal><span>04</span><h3>Réactiver</h3><p>Le commerce pourra préparer des actions de retour adaptées à sa clientèle.</p></article></div></div></section>
+        <section id="solutions" className="bo-benefits light-section ux-feature-section" data-motion-section>
+          <div className="site-container">
+            <div className="ux-centered-heading is-dark" data-reveal>
+              <p className="section-index">02 / FONCTIONNALITÉS INTERACTIVES</p>
+              <h2>Tout ce qu'il faut pour <span>fidéliser, engager et faire revenir.</span></h2>
+              <p>Découvrez chaque fonctionnalité et voyez comment WALS accompagne le retour client, sans transformer votre quotidien en catalogue d'outils.</p>
+            </div>
+            <MerchantFeatureTabs/>
+          </div>
+        </section>
 
-    <section className="bo-cockpit light-section" data-motion-section><div className="site-container"><div className="bo-heading-row" data-reveal><p className="section-index">04 / ESPACE COMMERCE</p><div><h2>Votre fidélité. <span>Un seul tableau de bord.</span></h2><p>L'interface ci-dessous présente un exemple de tableau de bord avec des données illustratives.</p></div></div><div className="bo-cockpit-frame" data-reveal><MerchantDashboardMockup/></div></div></section>
+        <section className="bo-cockpit light-section ux-product-proof" data-motion-section>
+          <div className="site-container">
+            <div className="bo-heading-row" data-reveal>
+              <p className="section-index">03 / ESPACE COMMERCE</p>
+              <div>
+                <h2>Pilotez votre fidélité <span>depuis un seul espace.</span></h2>
+                <p>Suivez vos cartes actives, visites, récompenses, campagnes et retours clients depuis votre tableau de bord.</p>
+              </div>
+            </div>
+            <div className="ux-dashboard-annotations" data-reveal><span>Suivez vos clients</span><span>Mesurez les retours</span><span>Pilotez vos campagnes</span></div>
+            <div className="bo-cockpit-frame ux-dashboard-frame" data-reveal><MerchantDashboardMockup/></div>
+          </div>
+        </section>
 
-    <section id="secteurs" className="bo-markets dark-section" data-motion-section><div className="site-container"><div className="bo-heading-row bo-heading-light" data-reveal><p className="section-index light">05 / COMMERCES</p><div><h2>Une mécanique adaptée <span>à votre rythme de visite.</span></h2><p>Découvrez des exemples d'utilisation adaptés aux principaux métiers de proximité.</p></div></div><div className="bo-market-grid">{sectors.map((sector,index)=><Link href={`/commercants/${sector.slug}`} key={sector.slug}><article data-reveal><span>{String(index+1).padStart(2,"0")}</span><strong>{sector.shortName}</strong><small>Voir les cas d'usage →</small></article></Link>)}</div></div></section>
+        <section id="secteurs" className="bo-markets dark-section ux-sector-section" data-motion-section>
+          <div className="site-container">
+            <div className="bo-heading-row bo-heading-light" data-reveal>
+              <p className="section-index light">04 / COMMERCES</p>
+              <div>
+                <h2>Une fidélité adaptée <span>à votre commerce.</span></h2>
+                <p>Boulangerie, coiffure, restauration, beauté ou commerce de proximité : adaptez vos récompenses et vos actions à la fréquence réelle de vos clients.</p>
+              </div>
+            </div>
+            <div className="ux-sector-grid">
+              {sectors.map((sector,index) => (
+                <Link href={`/commercants/${sector.slug}`} key={sector.slug} className="ux-sector-card" data-reveal>
+                  <div className={`ux-sector-visual is-${index+1}`}><span>{sectorVisuals[index]}</span><i/><i/></div>
+                  <div><small>{String(index+1).padStart(2,"0")}</small><strong>{sector.shortName}</strong><span>Voir les cas d'usage →</span></div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
-    <section className="bo-faq light-section" data-motion-section><div className="site-container bo-faq-layout"><div className="bo-faq-heading" data-reveal><p className="section-index">06 / QUESTIONS</p><h2>Ce qu'il faut savoir <span>avant l'ouverture.</span></h2><p>Retrouvez les principales réponses sur le fonctionnement prévu de WALS.</p></div><div className="bo-faq-list" data-reveal>{merchantFaq.map(([question,answer])=><details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div></div></section>
+        <section className="bo-faq light-section" data-motion-section>
+          <div className="site-container bo-faq-layout">
+            <div className="bo-faq-heading" data-reveal>
+              <p className="section-index">05 / QUESTIONS</p>
+              <h2>Ce qu'il faut savoir <span>avant l'ouverture.</span></h2>
+              <p>Les réponses essentielles sur l'expérience WALS et son lancement.</p>
+            </div>
+            <div className="bo-faq-list" data-reveal>
+              {merchantFaq.map(([question,answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}
+            </div>
+          </div>
+        </section>
 
-    <section id="contact" className="bo-final" data-motion-section><div className="bo-final-grid"/><div className="site-container bo-final-layout"><div data-reveal><div className="bo-dev-note is-light"><i/> Ouverture prochaine</div><h2>Recevez un email <span>dès l'ouverture.</span></h2><p>Laissez simplement votre adresse email pour être prévenu lorsque le parcours commerce WALS sera disponible.</p><div className="bo-final-proof"><CheckIcon/> Une inscription suffit pour être prévenu de l'ouverture.</div></div><div className="bo-final-form" data-reveal><small>OUVERTURE WALS · COMMERCES</small><h3>Me prévenir de l'ouverture</h3><LaunchNotifyForm audience="merchant"/></div></div></section>
-  </main><SiteFooter/></div>;
+        <section id="contact" className="bo-final" data-motion-section>
+          <div className="bo-final-grid"/>
+          <div className="site-container bo-final-layout">
+            <div data-reveal>
+              <div className="bo-dev-note is-light"><i/> Ouverture prochaine</div>
+              <h2>Soyez parmi les premiers <span>à découvrir WALS.</span></h2>
+              <p>Laissez votre email et recevez une notification dès l'ouverture du parcours Commerçants.</p>
+              <div className="bo-final-proof"><CheckIcon/> Une inscription suffit pour être prévenu de l'ouverture.</div>
+            </div>
+            <div className="bo-final-form" data-reveal>
+              <small>OUVERTURE WALS · COMMERCES</small>
+              <h3>Me prévenir de l'ouverture</h3>
+              <LaunchNotifyForm audience="merchant"/>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter/>
+    </div>
+  );
 }

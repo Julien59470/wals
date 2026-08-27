@@ -8,6 +8,7 @@
 @import "./motion.css";
 @import "./styles/audiences.css";
 @import "./styles/performance.css";
+@import "./styles/cro-2026.css";
 
 :root {
   --font-sans: var(--font-manrope), Arial, sans-serif;
