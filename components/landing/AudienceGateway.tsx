@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AudienceHeader } from "@/components/landing/AudienceHeader";
 import { MotionExperience } from "@/components/landing/MotionExperience";
 import { Iphone, Samsung } from "@/components/landing/ProductDevices";
+import { WalletTrust } from "@/components/landing/WalletTrust";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 export function AudienceGateway() {
@@ -46,7 +47,7 @@ export function AudienceGateway() {
               <Iphone/>
               <Samsung/>
               <div className="gateway-float ux-gateway-benefit is-wallet">
-                <strong>Apple Wallet + Google Wallet</strong>
+                <strong>La fidélité directement dans le Wallet</strong>
                 <span>Une carte de fidélité toujours accessible.</span>
               </div>
               <div className="gateway-float ux-gateway-benefit is-reward">
@@ -57,6 +58,7 @@ export function AudienceGateway() {
                 <strong>À votre image</strong>
                 <span>Personnalisez l'expérience sous votre identité.</span>
               </div>
+              <WalletTrust tone="dark" compact className="ux-gateway-wallet-trust"/>
             </div>
           </div>
         </section>

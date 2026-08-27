@@ -7,6 +7,7 @@ import { MerchantJourney } from "@/components/landing/MerchantJourney";
 import { MotionExperience } from "@/components/landing/MotionExperience";
 import { Iphone, Samsung } from "@/components/landing/ProductDevices";
 import { ArrowIcon, CheckIcon } from "@/components/landing/VisualInterfaces";
+import { WalletTrust } from "@/components/landing/WalletTrust";
 import { LaunchNotifyForm } from "@/components/site/LaunchNotifyForm";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { merchantFaq } from "@/lib/content";
@@ -37,6 +38,7 @@ export function MerchantExperience() {
                 <span><CheckIcon/> Compatible Wallet</span>
                 <span><CheckIcon/> Mise en place simple</span>
               </div>
+              <WalletTrust tone="dark" className="ux-merchant-wallet-trust"/>
             </div>
 
             <div className="merchant-stage ux-merchant-stage" data-reveal>

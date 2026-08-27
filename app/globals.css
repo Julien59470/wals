@@ -9,6 +9,7 @@
 @import "./styles/audiences.css";
 @import "./styles/performance.css";
 @import "./styles/cro-2026.css";
+@import "./styles/wallet-trust.css";
 
 :root {
   --font-sans: var(--font-manrope), Arial, sans-serif;

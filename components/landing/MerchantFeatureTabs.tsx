@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { Iphone, Samsung } from "@/components/landing/ProductDevices";
 import { BenefitInterface, CheckIcon } from "@/components/landing/VisualInterfaces";
+import { WalletTrust } from "@/components/landing/WalletTrust";
 
 type FeatureKey = "loyalty" | "referral" | "campaign" | "play" | "stats";
 
@@ -99,6 +100,7 @@ export function MerchantFeatureTabs() {
           <ul>
             {active.bullets.map((bullet) => <li key={bullet}><CheckIcon/>{bullet}</li>)}
           </ul>
+          {active.key === "loyalty" && <WalletTrust tone="light" compact className="ux-feature-wallet-trust"/>}
         </div>
         <div className="ux-feature-visual" aria-live="polite"><FeatureVisual type={active.key}/></div>
       </div>

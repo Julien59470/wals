@@ -10,6 +10,16 @@ test("la racine oriente vers les deux audiences avec la DA historique", async ({
   await expect(page.getByText(/Ouverture prochaine/i).first()).toBeVisible();
 });
 
+test("les compatibilités Wallet affichent les marques Apple et Google", async ({ page }) => {
+  for (const path of ["/", "/commercants"]) {
+    await page.goto(path);
+    await expect(page.locator('[data-wallet-brand="apple"]').first()).toBeVisible();
+    await expect(page.locator('[data-wallet-brand="google"]').first()).toBeVisible();
+    await expect(page.getByText("Apple Wallet", { exact: true }).first()).toBeVisible();
+    await expect(page.getByText("Google Wallet", { exact: true }).first()).toBeVisible();
+  }
+});
+
 test("le parcours commerçant reste une liste de lancement simple", async ({ page }) => {
   await page.goto("/commercants");
   await expect(page.getByText(/Aperçu avant ouverture/i).first()).toBeVisible();
