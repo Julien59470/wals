@@ -84,7 +84,6 @@ export function MerchantExperience() {
                 <p>Suivez vos cartes actives, visites, récompenses, campagnes et retours clients depuis votre tableau de bord.</p>
               </div>
             </div>
-            <div className="ux-dashboard-annotations" data-reveal><span>Suivez vos clients</span><span>Mesurez les retours</span><span>Pilotez vos campagnes</span></div>
             <div className="bo-cockpit-frame ux-dashboard-frame" data-reveal><MerchantDashboardMockup/></div>
           </div>
         </section>
